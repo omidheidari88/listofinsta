@@ -1,0 +1,20 @@
+{
+	"files.exclude": {
+		"public": true,
+		"sessions": true,
+		"liara.json": true,
+		"note.txt": true,
+		"package-lock.json": true,
+		"package.json": true,
+		"server.js": true,
+		"test.html": true,
+		"yarn.lock": true,
+		"node_modules": true,
+		"**/view": true,
+		"**/services": true,
+		"**/app.js": true,
+		"**/router.js": true,
+		"**/middlewares": true,
+		"**/database": true
+	}
+}

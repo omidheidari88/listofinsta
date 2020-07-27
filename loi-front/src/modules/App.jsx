@@ -7,11 +7,9 @@ import AddList from './add/AddList';
 import Axios from '../Ajax/Axios';
 import Loader from './loader/Loader';
 
-export class App extends React.PureComponent {
+export class App extends Component {
 	constructor() {
 		super();
-		// bind in ES2015
-		// this.componentHandler = this.componentHandler.bind(this);
 		this.state = {
 			items: [],
 			is_loading: false,
@@ -38,9 +36,7 @@ export class App extends React.PureComponent {
 					};
 				});
 			})
-			.catch((err) => {
-				console.log(err);
-			})
+			.catch((err) => console.log(err))
 			.finally(() => {
 				this.setState((prev) => {
 					return {
@@ -49,31 +45,11 @@ export class App extends React.PureComponent {
 					};
 				});
 			});
-		// this.setState((prev) => {
-		// 	return {
-		// 		...prev,
-		// 		items: [...prev.items, item],
-		// 	};
-		// });
 	};
 
 	componentHandler = (type) => {
-		// const components = {
-		// 	add: <Add tasksItem={this.addItem} />,
-		// 	list: <Tasks tasks={this.state.items} />,
-		// 	course: <Courses />,
-		// };
-		// if (type in components) {
-		// this.setState({currenComponent: components[type]});
-		// }
 		this.setState({type});
 	};
-	//dar vc tozih dadam
-	// componentDidUpdate(prevProps, prevState) {
-	// 	if (prevState.items.length < this.state.items.length) {
-	// 		console.log('is less');
-	// 	}
-	// }
 	componentDidMount() {
 		this.axios
 			.get('http://localhost:5000/tasks/add')
@@ -88,7 +64,6 @@ export class App extends React.PureComponent {
 
 	render() {
 		const loading = this.state.is_loading ? <Loader /> : null;
-		// const components = this.state.type === 'add' ? <Add tasksItem={this.addItem} /> : <Tasks tasks={this.state.items} />;
 		const components = () => {
 			switch (this.state.type) {
 				case 'addCourse':
@@ -103,7 +78,6 @@ export class App extends React.PureComponent {
 					break;
 			}
 		};
-
 		return (
 			<div id="wrapper" className="rtl">
 				<div id="container">
@@ -117,3 +91,24 @@ export class App extends React.PureComponent {
 }
 
 export default App;
+
+//\\ bind in ES2015
+// this.componentHandler = this.componentHandler.bind(this);
+
+//\\ component choose with object key
+// const components = {
+// 	add: <Add tasksItem={this.addItem} />,
+// 	list: <Tasks tasks={this.state.items} />,
+// 	course: <Courses />,
+// };
+// if (type in components) {
+// this.setState({currenComponent: components[type]});
+// }
+
+//\\ dar vc tozih dadam
+// . export class App extends React.PureComponent
+// . componentDidUpdate(prevProps, prevState) {
+// 	 if (prevState.items.length < this.state.items.length) {
+// 		console.log('is less');
+// 	  }
+//   }
