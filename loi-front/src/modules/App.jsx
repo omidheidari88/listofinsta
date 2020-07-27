@@ -4,7 +4,7 @@ import Tasks from './task/Tasks';
 import Courses from './course/Courses';
 import AddCourse from './add/AddCourse';
 import AddList from './add/AddList';
-import Axios from '../Http/Axios';
+import Axios from '../Ajax/Axios';
 import Loader from './loader/Loader';
 
 export class App extends React.PureComponent {
