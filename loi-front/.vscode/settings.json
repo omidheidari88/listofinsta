@@ -1,0 +1,14 @@
+{
+	"files.exclude": {
+		"public": true,
+		"node_modules": true,
+		"yarn.lock": true,
+		"package-lock.json": true,
+		"package.json": true,
+		"**/images": true,
+		"**/Ajax": true,
+		"**/Partials": true,
+		"**/Utility": true,
+		"**/index.js": true
+	}
+}
