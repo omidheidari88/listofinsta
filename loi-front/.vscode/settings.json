@@ -6,9 +6,9 @@
 		"package-lock.json": true,
 		"package.json": true,
 		"**/images": true,
-		"**/Ajax": true,
-		"**/Partials": true,
+		// "**/Partials": true,
+		"**/index.js": true,
 		"**/Utility": true,
-		"**/index.js": true
+		"**/Ajax": true
 	}
 }

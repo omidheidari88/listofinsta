@@ -169,7 +169,7 @@ body {
 	border-radius: 40px;
 }
 .success-msg {
-	background-color: #0bb4a6 !important;
+	background-color: #194945 !important;
 	color: white;
 	box-shadow: 0px 5px 5px 0px #1f1e1e34;
 	border-radius: 40px;
@@ -891,7 +891,7 @@ Background Color / Color
 }
 
 .bg-info {
-	background-color: #25d5f2 !important;
+	background-color: #2ba399 !important;
 }
 
 .bg-light {
@@ -989,7 +989,7 @@ Borders
 }
 
 .text-info {
-	color: #25d5f2 !important;
+	color: #2ba399 !important;
 }
 
 .text-light {
@@ -1033,7 +1033,7 @@ Borders
 }
 
 .border-info {
-	border-color: #25d5f2 !important;
+	border-color: #2ba399 !important;
 }
 
 /*-----------------------
@@ -2085,7 +2085,7 @@ Pageheader
 }
 
 .sell-ratio .progress-bar {
-	background-color: #25d5f2;
+	background-color: #2ba399;
 }
 
 /* ==========================================================================
@@ -2872,8 +2872,8 @@ input[type='radio'] {
 
 .btn-info {
 	color: #fff;
-	background-color: #25d5f2;
-	border-color: #25d5f2;
+	background-color: #2ba399;
+	border-color: #2ba399;
 }
 
 .btn-info:hover {
@@ -3085,21 +3085,21 @@ input[type='radio'] {
 /*--- btn outline info --*/
 
 .btn-outline-info {
-	color: #25d5f2;
+	color: #2ba399;
 	background-color: transparent;
-	border-color: #25d5f2;
+	border-color: #2ba399;
 }
 
 .btn-outline-info:hover {
 	color: #fff;
-	background-color: #25d5f2;
-	border-color: #25d5f2;
+	background-color: #2ba399;
+	border-color: #2ba399;
 }
 
 .btn-outline-info.focus,
 .btn-outline-info:focus {
 	color: #fff;
-	background-color: #25d5f2;
+	background-color: #2ba399;
 	border-color: #0998b0;
 	box-shadow: 0 0 0 1px rgb(238, 184, 22);
 }

@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
-import Header from './header/Header';
-import Tasks from './task/Tasks';
-import Courses from './course/Courses';
-import AddCourse from './add/AddCourse';
-import AddList from './add/AddList';
+import Products from './Products';
+import Courses from './Courses';
+import SideBar from './SideBar';
+import AddCourse from './Courses/AddCourse';
+import AddProduct from './Products/AddProduct';
 import Axios from '../Ajax/Axios';
-import Loader from './loader/Loader';
+import Loader from '../Partials/Loader';
+import Header from '../Partials/Header';
 
 export class App extends Component {
 	constructor() {
@@ -13,7 +14,7 @@ export class App extends Component {
 		this.state = {
 			items: [],
 			is_loading: false,
-			type: 'list',
+			type: 'all',
 			filter: '',
 		};
 		this.axios = new Axios();
@@ -27,7 +28,7 @@ export class App extends Component {
 			};
 		});
 		this.axios
-			.post('http://localhost:5000/tasks/add', item)
+			.post('http://localhost:5000/products/add', item)
 			.then((res) => {
 				this.setState((prev) => {
 					return {
@@ -52,9 +53,8 @@ export class App extends Component {
 	};
 	componentDidMount() {
 		this.axios
-			.get('http://localhost:5000/tasks/add')
+			.get('http://localhost:5000/products/add')
 			.then((res) => {
-				console.log(res.data.items);
 				this.setState({
 					items: res.data.items,
 				});
@@ -68,12 +68,19 @@ export class App extends Component {
 			switch (this.state.type) {
 				case 'addCourse':
 					return <AddCourse />;
-				case 'addList':
-					return <AddList tasksItem={this.addItem} />;
-				case 'list':
-					return <Tasks tasks={this.state.items} render={this.componentHandler} />;
+				case 'addProduct':
+					return <AddProduct item={this.addItem} />;
+				case 'product':
+					return <Products products={this.state.items} />;
 				case 'course':
-					return <Courses render={this.componentHandler} />;
+					return <Courses />;
+				case 'all':
+					return (
+						<React.Fragment>
+							<Products products={this.state.items} />
+							<Courses />
+						</React.Fragment>
+					);
 				default:
 					break;
 			}
@@ -82,8 +89,15 @@ export class App extends Component {
 			<div id="wrapper" className="rtl">
 				<div id="container">
 					<Header render={this.componentHandler} />
-					{loading}
-					{components()}
+					<SideBar render={this.componentHandler} />
+					<div class="dashboard-wrapper mt-5">
+						<div class="dashboard-ecommerce">
+							<div class="container-fluid dashboard-content ">
+								{loading}
+								{components()}
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		);
@@ -97,8 +111,8 @@ export default App;
 
 //\\ component choose with object key
 // const components = {
-// 	add: <Add tasksItem={this.addItem} />,
-// 	list: <Tasks tasks={this.state.items} />,
+// 	add: <Add productsItem={this.addItem} />,
+// 	list: <products products={this.state.items} />,
 // 	course: <Courses />,
 // };
 // if (type in components) {
