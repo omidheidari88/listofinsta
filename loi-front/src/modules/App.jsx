@@ -12,7 +12,8 @@ export class App extends Component {
 	constructor() {
 		super();
 		this.state = {
-			items: [],
+			productItems: [],
+			courseItems: [],
 			is_loading: false,
 			type: 'all',
 			filter: '',
@@ -20,7 +21,7 @@ export class App extends Component {
 		this.axios = new Axios();
 	}
 
-	addItem = (item) => {
+	addProduct = (item) => {
 		this.setState((prev) => {
 			return {
 				...prev,
@@ -28,7 +29,34 @@ export class App extends Component {
 			};
 		});
 		this.axios
-			.post('http://localhost:5000/products/add', item)
+			.post('product/add', item)
+			.then((res) => {
+				this.setState((prev) => {
+					return {
+						...prev,
+						items: [...prev.items, res.data.item],
+					};
+				});
+			})
+			.catch((err) => console.log(err))
+			.finally(() => {
+				this.setState((prev) => {
+					return {
+						...prev,
+						is_loading: false,
+					};
+				});
+			});
+	};
+	addCourse = (item) => {
+		this.setState((prev) => {
+			return {
+				...prev,
+				is_loading: true,
+			};
+		});
+		this.axios
+			.post('course/add', item)
 			.then((res) => {
 				this.setState((prev) => {
 					return {
@@ -53,7 +81,7 @@ export class App extends Component {
 	};
 	componentDidMount() {
 		this.axios
-			.get('http://localhost:5000/products/add')
+			.get('product/add')
 			.then((res) => {
 				this.setState({
 					items: res.data.items,
@@ -67,18 +95,18 @@ export class App extends Component {
 		const components = () => {
 			switch (this.state.type) {
 				case 'addCourse':
-					return <AddCourse />;
+					return <AddCourse item={this.addCourse} />;
 				case 'addProduct':
-					return <AddProduct item={this.addItem} />;
+					return <AddProduct item={this.addProduct} />;
 				case 'product':
-					return <Products products={this.state.items} />;
+					return <Products products={this.state.productItems} />;
 				case 'course':
-					return <Courses />;
+					return <Courses courses={this.state.courseItems} />;
 				case 'all':
 					return (
 						<React.Fragment>
-							<Products products={this.state.items} />
-							<Courses />
+							<Products products={this.state.productItems} />
+							<Courses courses={this.state.courseItems} />
 						</React.Fragment>
 					);
 				default:
@@ -88,7 +116,7 @@ export class App extends Component {
 		return (
 			<div id="wrapper" className="rtl">
 				<div id="container">
-					<Header render={this.componentHandler} />
+					<Header />
 					<SideBar render={this.componentHandler} />
 					<div class="dashboard-wrapper mt-5">
 						<div class="dashboard-ecommerce">
@@ -111,8 +139,8 @@ export default App;
 
 //\\ component choose with object key
 // const components = {
-// 	add: <Add productsItem={this.addItem} />,
-// 	list: <products products={this.state.items} />,
+// 	add: <Add productsItem={this.addProduct} />,
+// 	list: <products products={this.state.productItems} />,
 // 	course: <Courses />,
 // };
 // if (type in components) {
@@ -122,7 +150,7 @@ export default App;
 //\\ dar vc tozih dadam
 // . export class App extends React.PureComponent
 // . componentDidUpdate(prevProps, prevState) {
-// 	 if (prevState.items.length < this.state.items.length) {
+// 	 if (prevState.productItems.length < this.state.productItems.length) {
 // 		console.log('is less');
 // 	  }
 //   }

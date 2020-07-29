@@ -1,20 +1,22 @@
 import React from 'react';
 import {getCategories} from '../../Utility/Category';
-import moment from 'jalali-moment';
-const AddCourse = ({tasksItem}) => {
+
+const AddCourse = ({item}) => {
 	const categories = getCategories();
 	const saveHandler = (e) => {
 		e.preventDefault();
 		const form = document.querySelector('#form');
 		const formsItem = {
-			// date: moment.from(form.task_title.value, 'fa', 'YYYY/MM/DD').format('YYYY/MM/DD'), //tabdile shamsi be miladi
-			date: moment(form.task_title.value, 'YYYY/MM/DD').locale('fa').format('YYYY/MM/DD'), //tabdile miladi be shamsi
-			category: form.task_category.value,
-			price: form.task_price.value,
-			phone: form.task_mobile.value,
-			status: form.task_status.value,
+			title: form.title.value,
+			type: form.type.value,
+			descript: form.descript.value,
+			time: form.time.value,
+			images: form.images.value,
+			price: form.price.value,
+			tags: form.tags.value,
+			status: form.course_status.value,
 		};
-		return tasksItem(formsItem);
+		return item(formsItem);
 	};
 
 	return (
@@ -22,7 +24,7 @@ const AddCourse = ({tasksItem}) => {
 			<div className="card">
 				<h5 className="card-header">ایجاد دوره جدید</h5>
 				<div className="card-body">
-					<form id="validationform" data-parsley-validate="" novalidate="" action="/admin/" method="POST" enctype="multipart/form-data">
+					<form id="form">
 						<div className="form-group row">
 							<div className="col">
 								<label htmlFor="title" className="control-label font-weight-bold">
@@ -86,8 +88,8 @@ const AddCourse = ({tasksItem}) => {
 
 						<div className="form-group row text-right">
 							<div className="col col-sm-10 col-lg-9 offset-sm-1 offset-lg-0">
-								<button type="submit" className="btn btn-space btn-primary">
-									ارسال
+								<button onClick={(e) => saveHandler(e)} type="submit" className="btn btn-success">
+									ذخیره اطلاعات
 								</button>
 							</div>
 						</div>

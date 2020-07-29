@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import Item from './Product';
+import Item from './Item';
 import NoItem from '../../Partials/Filter/NoItem';
 import Filter from '../../Partials/Filter';
 
@@ -39,7 +39,7 @@ class Products extends Component {
 		cost: 'هزینه',
 	};
 	render() {
-		const {products, render} = this.props;
+		const {products} = this.props;
 		const renderProduct = this.check(products);
 		return (
 			<div className="row">
@@ -56,14 +56,14 @@ class Products extends Component {
 						<Filter filtering={this.filterHandler} title={this.titles} />
 						<div className="card-header">لیست محصولات</div>
 						<div className="card-body">
-							<table className="table table-bordered table-hover table-striped">
+							<table className="table table-bordered table-hover table-striped text-center">
 								<thead>
 									<tr>
-										<th>نوع محصول</th>
+										<th>ID</th>
 										<th>دسته بندی</th>
 										<th>قیمت</th>
-										<th>وضعیت</th>
 										<th>تاریخ</th>
+										<th>وضعیت</th>
 										<th>عملیات</th>
 									</tr>
 								</thead>

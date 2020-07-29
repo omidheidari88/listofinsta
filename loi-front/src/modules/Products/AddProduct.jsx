@@ -1,7 +1,7 @@
 import React from 'react';
 import {getCategories} from '../../Utility/Category';
 import moment from 'jalali-moment';
-const Add = ({items}) => {
+const Add = ({item}) => {
 	const categories = getCategories();
 	const saveHandler = (e) => {
 		e.preventDefault();
@@ -14,7 +14,7 @@ const Add = ({items}) => {
 			phone: form.task_mobile.value,
 			status: form.task_status.value,
 		};
-		return items(formsItem);
+		return item(formsItem);
 	};
 
 	return (
@@ -25,10 +25,6 @@ const Add = ({items}) => {
 						<div className="card-header">ایجاد محصول جدید</div>
 						<div className="card-body">
 							<form id="form">
-								<div className="form-group">
-									<label htmlFor="task_title">تاریخ</label>
-									<input type="date" className="form-control" name="task_title" id="task_title" placeholder="عنوان وظیفه" />
-								</div>
 								<div className="form-group">
 									<label htmlFor="task_category">دسته بندی</label>
 									<select className="form-control" name="task_category" id="task_category">
@@ -46,13 +42,15 @@ const Add = ({items}) => {
 									<input type="text" className="form-control" name="task_mobile" id="task_mobile" placeholder="مثال : 09121231234" />
 								</div>
 								<div className="form-group">
+									<label htmlFor="task_title">تاریخ</label>
+									<input type="date" className="form-control" name="task_title" id="task_title" placeholder="عنوان وظیفه" />
+								</div>
+								<div className="form-group">
 									هزینه
-									<br />
 									<label className="switch">
 										<input type="radio" className="switch" name="task_status" id="task_status" defaultChecked={true} value="1" />
 										<span className="slider round"></span>
 									</label>
-									<br />
 									درآمد
 									<br />
 									<label className="switch">
@@ -60,7 +58,6 @@ const Add = ({items}) => {
 										<span className="slider round"></span>
 									</label>
 								</div>
-
 								<button onClick={(e) => saveHandler(e)} type="submit" className="btn btn-success">
 									ذخیره اطلاعات
 								</button>
