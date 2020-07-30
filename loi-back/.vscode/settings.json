@@ -5,7 +5,7 @@
 		"liara.json": true,
 		"note.txt": true,
 		"package-lock.json": true,
-		"package.json": true,
+		// "package.json": true,
 		"server.js": true,
 		"test.html": true,
 		"yarn.lock": true,

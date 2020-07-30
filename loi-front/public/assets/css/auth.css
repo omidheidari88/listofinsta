@@ -351,10 +351,10 @@ iframe {
 	transition: all 0.4s;
 
 	background: #d41872;
-	background: -webkit-linear-gradient(left, #a445b2, #d41872, #fa4299);
-	background: -o-linear-gradient(left, #a445b2, #d41872, #fa4299);
-	background: -moz-linear-gradient(left, #a445b2, #d41872, #fa4299);
-	background: linear-gradient(left, #a445b2, #d41872, #fa4299);
+	background: -webkit-linear-gradient(left, #a445b2, #d41872, #862250);
+	background: -o-linear-gradient(left, #a445b2, #d41872, #862250);
+	background: -moz-linear-gradient(left, #a445b2, #d41872, #862250);
+	background: linear-gradient(left, #a445b2, #d41872, #862250);
 }
 
 .focus-input100::after {
@@ -420,7 +420,6 @@ iframe {
 	color: #fff;
 	line-height: 1.2;
 	text-transform: uppercase;
-
 	display: -webkit-box;
 	display: -webkit-flex;
 	display: -moz-box;
@@ -431,28 +430,27 @@ iframe {
 	padding: 0 20px;
 	min-width: 160px;
 	height: 42px;
-	border-radius: 21px;
-
+	border-radius: 0px;
 	background: #d41872;
-	background: -webkit-linear-gradient(left, #a445b2, #d41872, #fa4299);
-	background: -o-linear-gradient(left, #a445b2, #d41872, #fa4299);
-	background: -moz-linear-gradient(left, #a445b2, #d41872, #fa4299);
-	background: linear-gradient(left, #a445b2, #d41872, #fa4299);
+	background: -webkit-linear-gradient(left, #a445b2, #d41872, #c71065);
+	background: -o-linear-gradient(left, #a445b2, #d41872, #862250);
+	background: -moz-linear-gradient(left, #a445b2, #d41872, #862250);
+	background: linear-gradient(left, #a445b2, #d41872, #862250);
 	position: relative;
 	z-index: 1;
-
 	-webkit-transition: all 0.4s;
 	-o-transition: all 0.4s;
 	-moz-transition: all 0.4s;
 	transition: all 0.4s;
+	box-shadow: 0px 5px 5px 0px #13121234;
 }
 .loginlista {
 	font-family: Ubuntu-Bold;
 	background: #d41872;
-	background: -webkit-linear-gradient(left, #a445b2, #d41872, #fa4299);
-	background: -o-linear-gradient(left, #a445b2, #d41872, #fa4299);
-	background: -moz-linear-gradient(left, #a445b2, #d41872, #fa4299);
-	background: linear-gradient(left, #a445b2, #d41872, #fa4299);
+	background: -webkit-linear-gradient(left, #a445b2, #d41872, #862250);
+	background: -o-linear-gradient(left, #a445b2, #d41872, #862250);
+	background: -moz-linear-gradient(left, #a445b2, #d41872, #862250);
+	background: linear-gradient(left, #a445b2, #d41872, #862250);
 }
 
 .login100-form-btn::before {
@@ -462,12 +460,12 @@ iframe {
 	z-index: -1;
 	width: 100%;
 	height: 100%;
-	border-radius: 21px;
+	border-radius: 0px;
 	background-color: #d41872;
 	top: 0;
 	left: 0;
 	opacity: 0;
-
+	box-shadow: 0px 10px 10px 0px #13121234;
 	-webkit-transition: all 0.4s;
 	-o-transition: all 0.4s;
 	-moz-transition: all 0.4s;
@@ -550,5 +548,96 @@ iframe {
 	.alert-validate::before {
 		visibility: visible;
 		opacity: 1;
+	}
+}
+
+.headerStyle {
+	background-color: #d41072;
+	color: #d41072;
+	text-align: center;
+	box-shadow: 0px 5px 5px 0px #1f1e1e34;
+	border: none;
+}
+.logo {
+	background-color: white;
+	color: #d41072;
+	text-align: center;
+	border: none;
+}
+.sss {
+	background-color: white;
+	color: white;
+	box-shadow: 0px 5px 5px 0px #1f1e1e34;
+}
+.list {
+	margin: 9px;
+	background-color: white;
+	box-shadow: 0px 5px 5px 0px #1f1e1e34;
+}
+
+/* Loader Style */
+
+.nb-spinner {
+	width: 75px;
+	height: 75px;
+	margin: 0;
+	background: transparent;
+	border-top: 4px solid #009688;
+	border-right: 4px solid transparent;
+	border-radius: 50%;
+	-webkit-animation: 1s spin linear infinite;
+	animation: 1s spin linear infinite;
+}
+
+/* BORDER TOP SPINNER */
+.bt-spinner {
+	width: 75px;
+	height: 75px;
+	border-radius: 50%;
+	background-color: transparent;
+	border: 4px solid rgb(34, 34, 34);
+	border-top-color: #d41872;
+	-webkit-animation: 1s spin linear infinite;
+	animation: 1s spin linear infinite;
+}
+
+@keyframes rotate {
+	100% {
+		-webkit-transform: rotate(360deg);
+		transform: rotate(360deg);
+	}
+}
+
+@keyframes spin {
+	from {
+		-webkit-transform: rotate(0deg);
+		transform: rotate(0deg);
+	}
+	to {
+		-webkit-transform: rotate(360deg);
+		transform: rotate(360deg);
+	}
+}
+
+@media only screen and (max-width: 968px) {
+	.flexbox > div {
+		-ms-flex: 0 0 33.3333333%;
+		flex: 0 0 33.3333333%;
+	}
+}
+
+@media only screen and (max-width: 768px) {
+	.flexbox > div {
+		-webkit-box-flex: 0;
+		-ms-flex: 0 0 50%;
+		flex: 0 0 50%;
+	}
+}
+
+@media only screen and (max-width: 568px) {
+	.flexbox > div {
+		-webkit-box-flex: 0;
+		-ms-flex: 0 0 100%;
+		flex: 0 0 100%;
 	}
 }

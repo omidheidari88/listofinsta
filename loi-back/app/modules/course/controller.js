@@ -1,17 +1,19 @@
-const {taskModel, courseModel} = require('./model');
-const {totalPrice} = require('../admin/model');
-exports.home = async (req, res) => {
-	// if (!('token' in req.session)) {
-	// 	return res.redirect('/auth/login');
-	// }
+const {saveCourse, deleteCourse, courseModel} = require('./model');
 
-	const courses = await courseModel();
-	const total = await totalPrice();
-	req.session.courses = courses;
-	req.session.price = total;
-	const tasks = await taskModel();
-	res.render('tasks/list', {tasks, user: req.session.user, courses: req.session.courses, admin: req.session.admin, price: req.session.price});
+exports.getItem = async (req, res) => {
+	const items = await courseModel();
+	res.status(201).send({items});
 };
-exports.adminPannel = async (req, res) => {
-	res.render('admin/index', {user: req.session.user});
+exports.store = async (req, res) => {
+	const items = req.body;
+	const id = await saveCourse(items);
+	res.status(201).send({message: 'items saved to DB', item: {...items, course_id: id}});
+};
+exports.remove = async (req, res) => {
+	const id = req.params.id;
+	const results = await deleteCourse(id);
+	if (results.affectedRows == 1) {
+		const item = await courseModel();
+		res.send({item});
+	}
 };

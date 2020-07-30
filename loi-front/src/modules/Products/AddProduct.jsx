@@ -1,6 +1,7 @@
 import React from 'react';
 import {getCategories} from '../../Utility/Category';
 import moment from 'jalali-moment';
+import {list} from '../../Partials/style';
 const Add = ({item}) => {
 	const categories = getCategories();
 	const saveHandler = (e) => {
@@ -21,7 +22,7 @@ const Add = ({item}) => {
 		<div>
 			<div className="row">
 				<div className="col">
-					<div className="card">
+					<div className="card" style={list}>
 						<div className="card-header">ایجاد محصول جدید</div>
 						<div className="card-body">
 							<form id="form">

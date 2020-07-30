@@ -156,6 +156,7 @@
 body {
 	font-style: normal;
 	font-weight: normal;
+	font-family: vazir !important;
 	font-size: 14px;
 	color: #71748d;
 	background-color: #efeff6;
@@ -1620,7 +1621,7 @@ Top Header
 }
 
 .navigation-horizontal .submenu .nav .nav-item .nav-link:hover {
-	color: #3d405c;
+	color: #c5f100;
 	border-radius: 2px;
 	background-color: transparent;
 }
@@ -1631,9 +1632,9 @@ Left Navigation Sidebar
 
 .nav-left-sidebar {
 	position: fixed;
-	width: 264px;
+	width: 200px;
 	height: 100%;
-	top: 60px;
+	top: 40px;
 	overflow: auto;
 	background-color: #fff;
 	-webkit-box-shadow: 0px 0px 28px 0px rgba(82, 63, 105, 0.13);
@@ -1652,7 +1653,7 @@ Left Navigation Sidebar
 	width: 0;
 	height: 0;
 	position: absolute;
-	left: 20px;
+	left: -30px;
 	vertical-align: 0.255em;
 	content: '';
 	border-top: 0.3em solid;
@@ -1685,7 +1686,7 @@ Left Navigation Sidebar
 .nav-left-sidebar .navbar-nav .nav-link {
 	font-size: 14px;
 	padding: 12px;
-	/* margin-bottom: 2px; */
+	margin-bottom: 6px;
 	color: #71789e;
 	transition: 0.3s;
 }
@@ -1707,10 +1708,10 @@ Left Navigation Sidebar
 }
 
 .nav-left-sidebar .submenu {
-	padding-left: 12px;
-	padding-right: 12px;
-	/* margin-top: 5px; */
-	background: #24274a;
+	padding: 12px;
+	margin-top: 3px;
+	/* background: #24274a; */
+	box-shadow: 0px 5px 5px 0px #1f1e1e34;
 }
 
 .nav-left-sidebar .submenu .nav .nav-item .nav-link {
@@ -1722,14 +1723,14 @@ Left Navigation Sidebar
 .nav-left-sidebar .navbar-nav .nav-link:focus,
 .nav-left-sidebar .navbar-nav .nav-link.active {
 	background-color: #e2e2eb;
-	color: #3d405c;
+	color: #495c3d;
 	border-radius: 2px;
 }
 
 .nav-left-sidebar .navbar-nav .nav-link:focus,
 .nav-left-sidebar .navbar-nav .nav-link:hover {
 	background-color: #e2e2eb;
-	color: #3d405c;
+	color: #1a1a1b;
 	border-radius: 2px;
 }
 
@@ -1755,7 +1756,7 @@ Leftsidebar - Primary
 ------------------------- */
 
 .sidebar-primary {
-	background-color: #414da7;
+	box-shadow: 0px 5px 5px 0px #1f1e1e34;
 }
 
 .sidebar-primary .nav-divider {
@@ -1798,7 +1799,7 @@ Leftsidebar - dark
 ------------------------- */
 
 .sidebar-dark {
-	background-color: #0e0c28;
+	background-color: #20280c;
 	-webkit-box-shadow: 0px 0px 28px 0px rgba(82, 63, 105, 0.13);
 	box-shadow: 0px 0px 28px 0px rgba(82, 63, 105, 0.13);
 	-webkit-transition: all 0.3s ease;
@@ -1812,33 +1813,33 @@ Leftsidebar - dark
 
 .sidebar-dark.nav-left-sidebar .nav-link i {
 	color: #7a80b4;
+	font-size: 20px;
 }
 
 .sidebar-dark.nav-left-sidebar .navbar-nav .nav-item {
 }
 
 .sidebar-dark.nav-left-sidebar .navbar-nav .nav-link {
-	color: #7a80b4;
+	color: #69754e;
 }
 
 .sidebar-dark.nav-left-sidebar .navbar-nav .nav-link:focus,
 .sidebar-dark.nav-left-sidebar .navbar-nav .nav-link:hover {
-	color: #fff;
-	background-color: #242849;
+	color: rgb(49, 48, 48);
+	box-shadow: 0px 5px 5px 0px #1f1e1e34;
 	border-radius: 2px;
 }
 
 .sidebar-dark.nav-left-sidebar .navbar-nav .nav-link:focus,
 .sidebar-dark.nav-left-sidebar .navbar-nav .nav-link.active {
-	background-color: #242849;
-	color: #fff;
+	background-color: #dedef0;
+	color: rgb(37, 37, 37);
 	border-radius: 2px;
 }
 
 .sidebar-dark.nav-left-sidebar .submenu .nav .nav-item .nav-link:hover {
-	color: #fff;
+	color: rgb(42, 42, 42);
 	border-radius: 2px;
-	background-color: #242849;
 }
 
 .sidebar-dark.nav-left-sidebar .navbar-nav .nav-item .badge {
@@ -1875,13 +1876,13 @@ Sidebar Page Navigations
 }
 
 .sidebar-nav-fixed ul li a:hover {
-	color: #5969ff;
+	color: #00ff15;
 }
 
 .sidebar-nav-fixed ul li a.active {
 	display: block;
 	color: #5969ff;
-	background: #e0e0fd;
+	background: #e6fde0;
 }
 
 /*--- Bootstrap Dropdown ----*/
@@ -1907,7 +1908,7 @@ Sidebar Page Navigations
 }
 
 .dropdown-item:hover {
-	color: #5969ff;
+	color: #00ff15;
 	background: #efeff6;
 }
 
@@ -2699,7 +2700,7 @@ input[type='radio'] {
 }
 
 .btn-brand:hover {
-	color: #2e2f39;
+	color: #00ff15;
 	background-color: #efb63e;
 	border-color: #efb63e;
 }
@@ -2873,14 +2874,14 @@ input[type='radio'] {
 .btn-info {
 	color: #fff;
 	background-color: #2ba399;
-	border-color: #2ba399;
+	border-color: #00ffea;
 }
-
+/* 
 .btn-info:hover {
 	color: #fff;
 	background-color: #17c0dc;
 	border-color: #17c0dc;
-}
+} */
 
 .btn-info.focus,
 .btn-info:focus {
@@ -2907,7 +2908,7 @@ input[type='radio'] {
 }
 
 .btn-light:hover {
-	color: #2e2f39;
+	color: #00ff15;
 	background-color: #d7d7df;
 	border-color: #d7d7df;
 }
@@ -5884,7 +5885,7 @@ Vertical Timeline - by CodyHouse.co
 
 .aside-content .nav li a:hover {
 	text-decoration: none;
-	background-color: #efeff6;
+	background-color: #f4f6ef;
 }
 
 .aside-nav .nav li.active a .icon {

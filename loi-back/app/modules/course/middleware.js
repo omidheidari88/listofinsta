@@ -6,11 +6,13 @@ const Path = require('path');
 const sharp = require('sharp');
 let getDir = () => {
 	let year = new Date().getFullYear();
+	console.log(year);
 	return `./public/assets/uploads/${year}`;
 };
 const storage = multer.diskStorage({
 	destination: (req, file, cb) => {
 		let dir = getDir();
+		console.log(dir);
 		mkdirp(dir).then(() => cb(null, dir));
 	},
 	filename: (req, file, cb) => {
@@ -23,10 +25,10 @@ const storage = multer.diskStorage({
 	},
 });
 //limit 5 megabyte
-const upload = multer({storage, limits: {fileSize: 1024 * 1024 * 5}});
-exports.upload = upload;
+exports.upload = multer({storage, limits: {fileSize: 1024 * 1024 * 5}});
 
 exports.fileToField = (req, res, next) => {
+	console.log(req.body.images);
 	if (!req.file) {
 		req.body.images = undefined;
 	} else {

@@ -1,10 +1,10 @@
 import React from 'react';
 
-const NoItem = () => {
+const NoItem = ({col}) => {
 	return (
 		<tr>
-			<td colSpan="6">
-				<span>Not Found</span>
+			<td colSpan={col}>
+				<span>موردی یافت نشد</span>
 			</td>
 		</tr>
 	);

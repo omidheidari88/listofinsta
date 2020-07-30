@@ -1,11 +1,12 @@
 import React from 'react';
 import {getCategories} from '../../Utility/Category';
-
+import {list} from '../../Partials/style';
 const AddCourse = ({item}) => {
 	const categories = getCategories();
 	const saveHandler = (e) => {
 		e.preventDefault();
 		const form = document.querySelector('#form');
+		console.log(form.images.value);
 		const formsItem = {
 			title: form.title.value,
 			type: form.type.value,
@@ -14,17 +15,16 @@ const AddCourse = ({item}) => {
 			images: form.images.value,
 			price: form.price.value,
 			tags: form.tags.value,
-			status: form.course_status.value,
 		};
 		return item(formsItem);
 	};
 
 	return (
 		<div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-			<div className="card">
+			<div className="card" style={list}>
 				<h5 className="card-header">ایجاد دوره جدید</h5>
 				<div className="card-body">
-					<form id="form">
+					<form id="form" enctype="multipart/form-data">
 						<div className="form-group row">
 							<div className="col">
 								<label htmlFor="title" className="control-label font-weight-bold">

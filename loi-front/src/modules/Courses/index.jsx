@@ -2,12 +2,14 @@ import React, {Component} from 'react';
 import Item from './Item';
 import NoItem from '../../Partials/Filter/NoItem';
 import Filter from '../../Partials/Filter';
+import FilterSign from '../../Partials/Filter/FilterSign';
+import {list} from '../../Partials/style';
 
 export class Table2 extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			filter: 'all',
+			filter: 'sign',
 		};
 	}
 	check = (courses) => {
@@ -24,7 +26,7 @@ export class Table2 extends Component {
 					.map((course) => <Item course={course} />)
 			);
 		}
-		return <NoItem />;
+		return <NoItem col="8" />;
 	};
 	filterHandler = (filter) => {
 		this.setState((prev) => {
@@ -42,11 +44,12 @@ export class Table2 extends Component {
 	render() {
 		const {courses} = this.props;
 		const renderCourses = this.check(courses);
+		const showFilter = this.state.filter === 'filter' ? <Filter filtering={this.filterHandler} title={this.titles} /> : <FilterSign filtering={this.filterHandler} />;
 		return (
 			<div className="row">
 				<div className="col">
-					<div className="card">
-						<Filter filtering={this.filterHandler} title={this.titles} />
+					<div className="card" style={list}>
+						{showFilter}
 						{/* <div className="card-body">
 							<div className="actions">
 								<button onClick={(e) => render('addCourse')} className="btn btn-outline-success btn-icon m-l-5">

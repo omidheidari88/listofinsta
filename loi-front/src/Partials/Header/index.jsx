@@ -1,14 +1,17 @@
 import React, {Component} from 'react';
-
 export class index extends Component {
 	render() {
 		return (
 			<div className="dashboard-header ">
-				<nav className="navba fixed-top bg-warning">
-					<a className="navbar-brand btn-warning centered" href="index.html">
-						<span>admin pannel</span>
-						<i className="material-icons">admin_panel_settings</i>
-					</a>
+				<nav className="navba fixed-top login100-form-btn" style={{color: 'black'}}>
+					<div className=" m-t-32 " style={{color: 'black'}}>
+						<button type="submit" style={{color: 'white'}}>
+							List Of Insta
+						</button>
+					</div>
+					{/* <button className="navbar-brand  centered " style={logo}>
+						<span>list of insta</span>
+					</button> */}
 
 					{/* <a href="/" className="btn btn-primary navbar-right-top m-2  btn-icon">
 						<i className="material-icons">home</i>

@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import Item from './Item';
 import NoItem from '../../Partials/Filter/NoItem';
 import Filter from '../../Partials/Filter';
+import FilterSign from '../../Partials/Filter/FilterSign';
+import {list} from '../../Partials/style';
 
 class Products extends Component {
 	// eslint-disable-next-line no-useless-constructor
@@ -23,7 +25,7 @@ class Products extends Component {
 				})
 				.map((product) => <Item {...product} />);
 		}
-		return <NoItem />;
+		return <NoItem col="6" />;
 	};
 	filterHandler = (filter) => {
 		this.setState((prev) => {
@@ -41,10 +43,12 @@ class Products extends Component {
 	render() {
 		const {products} = this.props;
 		const renderProduct = this.check(products);
+		const showFilter = this.state.filter === 'filter' ? <Filter filtering={this.filterHandler} title={this.titles} /> : <FilterSign filtering={this.filterHandler} />;
+
 		return (
 			<div className="row">
 				<div className="col">
-					<div className="card">
+					<div className="card" style={list}>
 						{/* <div className="card-body">
 							<div className="actions">
 								<button onClick={(e) => render('addList')} className="btn btn-outline-success btn-icon m-l-5">
@@ -53,7 +57,7 @@ class Products extends Component {
 								</button>
 							</div>
 						</div> */}
-						<Filter filtering={this.filterHandler} title={this.titles} />
+						{showFilter}
 						<div className="card-header">لیست محصولات</div>
 						<div className="card-body">
 							<table className="table table-bordered table-hover table-striped text-center">

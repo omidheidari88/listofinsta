@@ -28,7 +28,7 @@ exports.store = async (req, res) => {
 			await totalCourse(course.course_id);
 		});
 		courses.forEach(async (course) => {
-			const totalTime = await require('./middleware').updateTime(courses);
+			const totalTime = await require('../course/middleware').updateTime(courses);
 			await update(course.course_id, {total_time: totalTime});
 		});
 		req.session.courses = courses;
@@ -66,7 +66,7 @@ exports.updateCourse = async (req, res) => {
 			await totalCourse(course.course_id);
 		});
 		courses.forEach(async (course) => {
-			const totalTime = await require('./middleware').updateTime(courses);
+			const totalTime = await require('../course/middleware').updateTime(courses);
 			await update(course.course_id, {total_time: totalTime});
 		});
 
@@ -91,7 +91,7 @@ exports.remove = async (req, res) => {
 		await totalCourse(course.course_id);
 	});
 	courses.forEach(async (course) => {
-		const totalTime = await require('./middleware').updateTime(courses);
+		const totalTime = await require('../course/middleware').updateTime(courses);
 		await update(course.course_id, {total_time: totalTime});
 	});
 	if (results.affectedRows == 1) {

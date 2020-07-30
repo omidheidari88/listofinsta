@@ -1,5 +1,5 @@
 const {isAdmin, authMiddleware, courseValidator} = require('../auth/middleware');
-const {upload, fileToField} = require('./middleware');
+const {upload, fileToField} = require('../course/middleware');
 const {adminPannel, store, remove, showEditCourse, updateCourse} = require('./controller');
 const express = require('express');
 const router = express.Router();

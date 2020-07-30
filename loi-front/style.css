@@ -1,0 +1,266 @@
+body {
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	background-color: #263238;
+	height: 100vh;
+	padding: 0;
+	margin: 0;
+	font-family: Arial;
+}
+
+.flexbox {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-ms-flex-wrap: wrap;
+	flex-wrap: wrap;
+}
+
+.flexbox > div {
+	width: 300px;
+	height: 300px;
+	-webkit-box-flex: 0;
+	-ms-flex: 0 0 25%;
+	flex: 0 0 25%;
+	border: 1px solid rgba(255, 255, 255, 0.1);
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	margin: 0;
+	position: relative;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-pack: center;
+	-ms-flex-pack: center;
+	justify-content: center;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	align-items: center;
+	overflow: hidden;
+}
+
+/* NO BORDER SPINNER */
+.nb-spinner {
+	width: 75px;
+	height: 75px;
+	margin: 0;
+	background: transparent;
+	border-top: 4px solid #009688;
+	border-right: 4px solid transparent;
+	border-radius: 50%;
+	-webkit-animation: 1s spin linear infinite;
+	animation: 1s spin linear infinite;
+}
+
+/* BORDER TOP SPINNER */
+.bt-spinner {
+	width: 75px;
+	height: 75px;
+	border-radius: 50%;
+	background-color: transparent;
+	border: 4px solid #222;
+	border-top-color: #009688;
+	-webkit-animation: 1s spin linear infinite;
+	animation: 1s spin linear infinite;
+}
+
+.sh-spinner div:nth-child(2) {
+	animation-delay: -0.3s;
+}
+.sh-spinner div:nth-child(3) {
+	animation-delay: -0.15s;
+}
+*/ .cm-spinner::before {
+	border-top-color: #bad375;
+	-webkit-animation: 3s spin linear infinite;
+	animation: 3s spin linear infinite;
+}
+
+.cm-spinner::after {
+	border-top-color: #26a9e0;
+	-webkit-animation: spin 1.5s linear infinite;
+	animation: spin 1.5s linear infinite;
+}
+
+.spinner-7 {
+	width: 60px;
+	height: 60px;
+	margin: 0;
+	background: transparent;
+	border-top: 4px solid #fff;
+	border-right: 4px solid transparent;
+	border-radius: 50%;
+	-webkit-animation: 1s spin linear infinite;
+	animation: 1s spinBorder linear infinite;
+}
+
+@keyframes rotate {
+	100% {
+		-webkit-transform: rotate(360deg);
+		transform: rotate(360deg);
+	}
+}
+
+@keyframes spin {
+	from {
+		-webkit-transform: rotate(0deg);
+		transform: rotate(0deg);
+	}
+	to {
+		-webkit-transform: rotate(360deg);
+		transform: rotate(360deg);
+	}
+}
+
+@keyframes spinBack {
+	from {
+		-webkit-transform: rotate(0deg);
+		transform: rotate(0deg);
+	}
+	to {
+		-webkit-transform: rotate(-720deg);
+		transform: rotate(-720deg);
+	}
+}
+
+@keyframes spinBorder {
+	0% {
+		-webkit-transform: rotate(0deg);
+		transform: rotate(0deg);
+		border-width: 15px;
+	}
+	50% {
+		-webkit-transform: rotate(180deg);
+		transform: rotate(180deg);
+		border-width: 3px;
+	}
+	100% {
+		-webkit-transform: rotate(360deg);
+		transform: rotate(360deg);
+		border-width: 15px;
+	}
+}
+
+@keyframes grow {
+	0%,
+	40%,
+	100% {
+		-webkit-transform: scale(0);
+		transform: scale(0);
+	}
+	40% {
+		-webkit-transform: scale(1);
+		transform: scale(1);
+	}
+}
+
+@keyframes triforce {
+	0% {
+		border-bottom-color: rgb(206, 181, 2);
+	}
+	40% {
+		border-bottom-color: rgba(206, 181, 2, 0);
+	}
+	80% {
+		border-bottom-color: rgb(206, 181, 2);
+	}
+	100% {
+		border-bottom-color: rgb(206, 181, 2);
+	}
+}
+
+@keyframes pulsate {
+	0% {
+		-webkit-transform: rotate(45deg) scale(0.8);
+		transform: rotate(45deg) scale(0.8);
+		transform: rotate(45deg) scale(0.8);
+	}
+	5% {
+		-webkit-transform: rotate(45deg) scale(0.9);
+		transform: rotate(45deg) scale(0.9);
+	}
+	10% {
+		-webkit-transform: rotate(45deg) scale(0.8);
+		transform: rotate(45deg) scale(0.8);
+	}
+	15% {
+		-webkit-transform: rotate(45deg) scale(1);
+		transform: rotate(45deg) scale(1);
+	}
+	50% {
+		-webkit-transform: rotate(45deg) scale(0.8);
+		transform: rotate(45deg) scale(0.8);
+	}
+	100% {
+		-webkit-transform: rotate(45deg) scale(0.8);
+		transform: rotate(45deg) scale(0.8);
+	}
+}
+
+@keyframes opaque {
+	0% {
+		opacity: 0.1;
+	}
+	40% {
+		opacity: 1;
+	}
+	80% {
+		opacity: 0.1;
+	}
+	100% {
+		opacity: 0.1;
+	}
+}
+
+@keyframes mesh {
+	0% {
+		transform-origin: 50% -100%;
+
+		transform: rotate(0);
+	}
+	50% {
+		transform-origin: 50% -100%;
+		transform: rotate(360deg);
+	}
+	50.1% {
+		transform-origin: 50% 200%;
+		transform: rotate(0deg);
+	}
+	100% {
+		transform-origin: 50% 200%;
+		transform: rotate(360deg);
+	}
+}
+
+@media only screen and (max-width: 968px) {
+	.flexbox > div {
+		-ms-flex: 0 0 33.3333333%;
+		flex: 0 0 33.3333333%;
+	}
+}
+
+@media only screen and (max-width: 768px) {
+	.flexbox > div {
+		-webkit-box-flex: 0;
+		-ms-flex: 0 0 50%;
+		flex: 0 0 50%;
+	}
+}
+
+@media only screen and (max-width: 568px) {
+	.flexbox > div {
+		-webkit-box-flex: 0;
+		-ms-flex: 0 0 100%;
+		flex: 0 0 100%;
+	}
+}
+
+a {
+	color: #009688;
+	display: block;
+	text-align: center;
+	font-size: 26px;
+	text-decoration: none;
+	cursor: pointer;
+	margin: 2rem auto;
+}

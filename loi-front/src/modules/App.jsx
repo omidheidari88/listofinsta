@@ -34,7 +34,7 @@ export class App extends Component {
 				this.setState((prev) => {
 					return {
 						...prev,
-						items: [...prev.items, res.data.item],
+						items: [...prev.productItems, res.data.item],
 					};
 				});
 			})
@@ -58,10 +58,11 @@ export class App extends Component {
 		this.axios
 			.post('course/add', item)
 			.then((res) => {
+				console.log(res.data.item);
 				this.setState((prev) => {
 					return {
 						...prev,
-						items: [...prev.items, res.data.item],
+						items: [...prev.courseItems, res.data.item],
 					};
 				});
 			})
@@ -84,7 +85,15 @@ export class App extends Component {
 			.get('product/add')
 			.then((res) => {
 				this.setState({
-					items: res.data.items,
+					productItems: res.data.items,
+				});
+			})
+			.catch((err) => console.log(err));
+		this.axios
+			.get('course/add')
+			.then((res) => {
+				this.setState({
+					courseItems: res.data.items,
 				});
 			})
 			.catch((err) => console.log(err));
@@ -118,9 +127,9 @@ export class App extends Component {
 				<div id="container">
 					<Header />
 					<SideBar render={this.componentHandler} />
-					<div class="dashboard-wrapper mt-5">
-						<div class="dashboard-ecommerce">
-							<div class="container-fluid dashboard-content ">
+					<div class="dashboard-wrapper mt-3">
+						<div class="dashboard-ecommerce ">
+							<div class="container-fluid dashboard-content  ">
 								{loading}
 								{components()}
 							</div>
