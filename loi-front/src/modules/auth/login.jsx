@@ -1,79 +1,74 @@
-<link rel="stylesheet" type="text/css" href="/assets/css/auth.css" />
-<link rel="stylesheet" type="text/css" href="/assets/css/util.css" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	<body>
-		<div class="limiter">
-	
-			<div class="container-login100" style="background-image: url('/assets/images/6771.jpg');">
-				<div class="wrap-login100 p-t-30 p-b-50">
-					<span class="login100-form-title p-b-41 ">Login</span>
-					<%- include('../partials/messages') %>
-					<form class="login100-form validate-form p-b-33 p-t-5" action="/auth/login" method="POST">
-						<div class="wrap-input100 validate-input" data-validate="Enter username">
-							<input type="email" class="input100" name="email" id="email" placeholder="username" value="<%= typeof email!='undefined' ?email:'' %>" />
-							<span class="focus-input100" data-placeholder="&#xe82a;"></span>
-						</div>
-						<div class="wrap-input100 validate-input" data-validate="Enter password">
+import React from 'react';
 
-							<input type="password" class="input100" name="password" id="password" placeholder="password" value="<%= typeof password!='undefined' ?password:'' %>"/>
-							<span class="focus-input100" data-placeholder="&#xe80f;"></span>
+const Login = ({changeType, item}) => {
+	const postItems = (e) => {
+		e.preventDefault();
+		const form = document.querySelector('#form');
+		const formsItem = {
+			email: form.email.value,
+			password: form.password.value,
+		};
+		return item(formsItem);
+	};
+
+	return (
+		<div className="limiter">
+			<div className="container-login100" style={{'background-image': "url('/assets/images/6771.jpg"}}>
+				<div className="wrap-login100">
+					<span className="login100-form-title  ">Login</span>
+					<form id="form" className="login100-form validate-form p-b-33 p-t-5" onSubmit={(e) => postItems(e)}>
+						<div className="wrap-input100 validate-input" data-validate="Enter username">
+							<input type="email" className="input100" name="email" id="email" placeholder="username" /> {/*value={typeof 'email' != 'undefined' ? 'email' : ''} */}
+							<span className="focus-input100" data-placeholder="&#xe82a;"></span>
 						</div>
-						<div class="container-login100-form-btn m-t-32 login-customize">
-							<button type="submit" class="login100-form-btn">Login</button>
+						<div className="wrap-input100 validate-input" data-validate="Enter password">
+							<input type="password" className="input100" name="password" id="password" placeholder="password" />
+							<span className="focus-input100" data-placeholder="&#xe80f;"></span>
 						</div>
-						
-						<div class="container-login100-form-btn m-t-12 login-customize">
-							<span class="login-with m-b-10">Or</span>
-							<div class="container-login100-form-btn">
-							
-								<div class="login-with m-b-10">Log in / Sign up</div>
-					
+						<div className="container-login100-form-btn m-t-32 login-customize">
+							<button type="submit" className="login100-form-btn">
+								Login
+							</button>
 						</div>
-						<div>
-							<a href="/auth/google" class="btn btn-outline-danger btn-social btn-google  btn-icon">
-						
-							 <i class="fa fa-google" style="font-size:22px;"></i>
-							</a> 
-							<a href="/auth/google" class="btn btn-outline-danger btn-social btn-apple btn-icon">
-						
-								<i class="fa fa-apple" style="font-size:22px"></i>
-							</a> 
-							<a href="/auth/google" class="btn btn-outline-danger btn-social btn-facebook btn-icon">
-							
-								<i class="fa fa-facebook" style="font-size:22px"></i>
-							</a> 
-							<a href="/auth/google" class="btn btn-outline-danger btn-social btn-twitter btn-icon">
-							
-								<i class="fa fa-twitter" style="font-size:22px"></i>
-							</a> 
+						<div className="container-login100-form-btn m-t-12 login-customize">
+							<span className="login-with m-b-10">Or</span>
+							<div className="container-login100-form-btn">
+								<div className="login-with m-b-10"> Sign up</div>
+							</div>
+							<div>
+								<a href="/auth/google" className="btn btn-outline-danger btn-social btn-google  btn-icon m-l-2">
+									<i className="fa fa-google"></i>
+								</a>
+								<a href="/auth/google" className="btn btn-outline-danger btn-social btn-apple btn-icon m-l-2">
+									<i className="fa fa-apple"></i>
+								</a>
+								<a href="/auth/google" className="btn btn-outline-danger btn-social btn-facebook btn-icon m-l-2">
+									<i className="fa fa-facebook"></i>
+								</a>
+								<a href="/auth/google" className="btn btn-outline-danger btn-social btn-twitter btn-icon m-l-2">
+									<i className="fa fa-twitter"></i>
+								</a>
+							</div>
 						</div>
-						</div>
-						<div class="login110-form p-b-33 p-t-5 mt-4">
-						
-							<p class="mt-3">
+						<div className="login110-form p-b-33 p-t-5 mt-4">
+							<p className="mt-3">
 								Remember me
-								<input id="remember" type="checkbox" name="remember">
-						
+								<input id="remember" type="checkbox" name="remember" />
 							</p>
-							<p class="mt-3">
+							<p className="mt-3">
 								Forgot Password?
-								<a href="/auth/forgetpassword">	Click here</a>
-				
+								<a href="/auth/forgetpassword"> Click here</a>
 							</p>
-							<p class="mt-3">
-								Don't Have a account?
-								<a href="/auth/register">Sign up</a>
-							</p>
-				
+							<p className="mt-3">Don't Have a account?</p>
 						</div>
 					</form>
-			
+					<button className="btn btn-info" onClick={() => changeType('register')}>
+						Sign up
+					</button>
 				</div>
 			</div>
 		</div>
-		<div id="dropDownSelect1"></div>
-		<script src="/assets/js/jquery-3.2.1.min.js"></script>
-		<script src="/assets/js/auth.js"></script>
+	);
+};
 
-	</body>
-</html>
+export default Login;

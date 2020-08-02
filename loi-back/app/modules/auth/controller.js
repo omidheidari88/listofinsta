@@ -10,29 +10,31 @@ exports.showLogin = async (req, res) => {
 	res.render('auth/login', {message});
 };
 exports.doLogin = async (req, res, next) => {
-	const {email, password, remember} = req.body;
-	const messages = [];
-	const result = validationResult(req);
-	const errors = result.array();
-	errors.forEach((err) => messages.push(err.msg));
-	if (messages.length > 0) {
-		return res.render('auth/login', {messages, password, email});
-	} else {
-		// passport.authenticate('local-login', {
-		// 	successRedirect: '/',
-		// 	failureRedirect: '/auth/login',
-		// 	failureFlash: true,
-		// })(req, res, next);
-		passport.authenticate('local-login', (err, user) => {
-			if (!user) {
-				return res.redirect('/auth/login');
-			}
-			if (remember) {
-				res.cookie('rememberBox', uniqueString(), {maxAge: 1000 * 60 * 60 * 24 * 6, httpOnly: true, signed: true});
-			}
-			return res.redirect('/');
-		})(req, res, next);
-	}
+	console.log(req.body);
+	const {email, password} = req.body;
+	res.send({message: 'LOGIN'});
+	// const messages = [];
+	// const result = validationResult(req);
+	// const errors = result.array();
+	// errors.forEach((err) => messages.push(err.msg));
+	// if (messages.length > 0) {
+	// 	return res.render('auth/login', {messages, password, email});
+	// } else {
+	// 	// passport.authenticate('local-login', {
+	// 	// 	successRedirect: '/',
+	// 	// 	failureRedirect: '/auth/login',
+	// 	// 	failureFlash: true,
+	// 	// })(req, res, next);
+	// 	passport.authenticate('local-login', (err, user) => {
+	// 		if (!user) {
+	// 			return res.redirect('/auth/login');
+	// 		}
+	// 		if (remember) {
+	// 			res.cookie('rememberBox', uniqueString(), {maxAge: 1000 * 60 * 60 * 24 * 6, httpOnly: true, signed: true});
+	// 		}
+	// 		return res.redirect('/');
+	// 	})(req, res, next);
+	// }
 };
 
 exports.showRegister = async (req, res) => {
@@ -52,17 +54,17 @@ exports.doRegister = async (req, res, next) => {
 		req.flash('errors', messages);
 	}
 	const recaptcha = googleRecaptcha().render();
-	const recaptcharesult = await verifyRecaptcha(req, res, googleRecaptcha());
-	if (recaptcharesult === false) {
-		messages.push('check robot box');
-		req.flash('errors', messages);
-	}
+	// const recaptcharesult = await verifyRecaptcha(req, res, googleRecaptcha());
+	// if (recaptcharesult === false) {
+	// 	messages.push('check robot box');
+	// 	req.flash('errors', messages);
+	// }
 	if (messages.length > 0) {
 		return res.render('auth/register', {recaptcha, messages, first_name, last_name, password, confpass, email});
 	} else {
 		passport.authenticate('local-register', {
-			successRedirect: '/auth/login',
-			failureRedirect: '/auth/register',
+			successRedirect: res.send({message: 'REGISTER success'}),
+			failureRedirect: res.send({message: 'REGISTER failed'}),
 			failureFlash: true,
 		})(req, res, next);
 	}

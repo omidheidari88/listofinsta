@@ -4,9 +4,13 @@ const express = require('express');
 const router = express.Router();
 
 router.get('/login', showLogin);
-router.post('/login', [loginValidator], doLogin);
+router.post('/login', doLogin);
+{
+	// [loginValidator]
+	// [registerValidator]
+}
 router.get('/register', showRegister);
-router.post('/register', [registerValidator], doRegister);
+router.post('/register', doRegister);
 router.get('/logout', logout);
 router.get('/google', google);
 router.get('/google/callback', googleCallback);

@@ -1,11 +1,13 @@
 import React, {Component} from 'react';
 import {sss} from '../../Partials/style';
+
 export class index extends Component {
 	render() {
 		const {render} = this.props;
 		const check = (input) => {
 			render(input);
 		};
+
 		return (
 			<div>
 				<div className="nav-left-sidebar sidebar-dark ml-0 " style={sss}>
@@ -14,6 +16,7 @@ export class index extends Component {
 							<button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 								<span className="navbar-toggler-icon"></span>
 							</button>
+
 							<div className="collapse navbar-collapse" id="navbarNav">
 								<ul className="navbar-nav flex-column pr-0">
 									<li className="nav-item">

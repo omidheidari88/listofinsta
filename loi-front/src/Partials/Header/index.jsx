@@ -1,14 +1,16 @@
 import React, {Component} from 'react';
+import Modals from '../../modules/Modal/index';
 export class index extends Component {
 	render() {
 		return (
-			<div className="dashboard-header ">
-				<nav className="navba fixed-top login100-form-btn" style={{color: 'black'}}>
-					<div className=" m-t-32 " style={{color: 'black'}}>
+			<div>
+				<nav className="fixed-top login100-form-btn" style={{color: 'black'}}>
+					<div className=" m-t-2 " style={{color: 'black'}}>
 						<button type="submit" style={{color: 'white'}}>
-							List Of Insta
+							<Modals />
 						</button>
 					</div>
+
 					{/* <button className="navbar-brand  centered " style={logo}>
 						<span>list of insta</span>
 					</button> */}

@@ -222,29 +222,53 @@ iframe {
 	color: #d41872;
 	border-color: #ffffff;
 }
+.btn-google {
+	background-color: #db4437 !important;
+	color: #ffffff !important;
+	font-size: 13px;
+}
 .btn-google:hover {
-	background-color: #db4437;
-	color: #ffffff;
-	border-radius: 2px;
-	border-color: #db4437;
+	border-radius: 5px;
+	font-size: 12px;
+	transition: ease-in-out 0.2s;
+	box-shadow: 0px 5px 5px 0px #1f1e1e34 !important;
+}
+.btn-facebook {
+	background-color: #4267b2 !important;
+	color: #ffffff !important;
+	border-radius: 2px !important;
+	border-color: #4267b2 !important;
 }
 .btn-facebook:hover {
-	background-color: #4267b2;
-	color: #ffffff;
-	border-radius: 2px;
-	border-color: #4267b2;
+	border-radius: 5px;
+	font-size: 12px;
+	transition: ease-in-out 0.2s;
+	box-shadow: 0px 5px 5px 0px #1f1e1e34 !important;
+}
+.btn-apple {
+	background-color: #000000 !important;
+	color: #f9f6ef !important;
+	border-radius: 2px !important;
+	border-color: #000000 !important;
+	font-size: 13px;
 }
 .btn-apple:hover {
-	background-color: #000000;
-	color: #f9f6ef;
-	border-radius: 2px;
-	border-color: #000000;
+	border-radius: 5px;
+	font-size: 12px;
+	transition: ease-in-out 0.2s;
+	box-shadow: 0px 5px 5px 0px #1f1e1e34 !important;
+}
+.btn-twitter {
+	background-color: #1da1f2 !important;
+	color: #ffffff !important;
+	border-radius: 2px !important;
+	border-color: #1da1f2 !important;
 }
 .btn-twitter:hover {
-	background-color: #1da1f2;
-	color: #ffffff;
-	border-radius: 2px;
-	border-color: #1da1f2;
+	border-radius: 5px;
+	font-size: 12px;
+	transition: ease-in-out 0.2s;
+	box-shadow: 0px 5px 5px 0px #1f1e1e34 !important;
 }
 /*------------------------------------------------------------------
 [ Form ]*/
@@ -640,4 +664,39 @@ iframe {
 		-ms-flex: 0 0 100%;
 		flex: 0 0 100%;
 	}
+}
+
+.modal-wrapper {
+	top: 0;
+	left: 0;
+	position: fixed;
+	justify-content: center;
+	align-items: center;
+	display: flex;
+	width: 100%;
+	height: 10% !important;
+	z-index: 99999;
+}
+.modal-overlay {
+	width: 40%;
+	height: 0 !important;
+	justify-content: center;
+	align-items: center;
+}
+.modalStatus-show {
+	visibility: visible;
+}
+.modalStatus-hidden {
+	visibility: hidden;
+}
+.modal-img-effect {
+	/* animation: 15s spin linear infinite; */
+	/* border: 1px solid rgb(0, 255, 221); */
+	border-radius: 20%;
+	box-shadow: 0px 10px 10px 0px #04d1d8d7;
+}
+li.page-current a {
+	color: #d41872;
+	font-size: 1.1rem;
+	box-shadow: -2px 6px 5px 0px #1f1e1e34;
 }

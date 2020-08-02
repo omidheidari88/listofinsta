@@ -4,9 +4,10 @@ import NoItem from '../../Partials/Filter/NoItem';
 import Filter from '../../Partials/Filter';
 import FilterSign from '../../Partials/Filter/FilterSign';
 import {list} from '../../Partials/style';
+import Pagination from '../../Partials/Pagination';
+import Table from '../../Partials/Table';
 
 class Products extends Component {
-	// eslint-disable-next-line no-useless-constructor
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -17,7 +18,7 @@ class Products extends Component {
 		if (products.length > 0) {
 			return products
 				.filter((product) => {
-					if (this.state.filter === 'all') return true;
+					if (this.state.filter === 'all' || this.state.filter === 'filter') return true;
 					else {
 						const filterType = this.state.filter === 'income' ? 2 : 1;
 						return product.status === filterType;
@@ -40,6 +41,20 @@ class Products extends Component {
 		income: 'درآمد',
 		cost: 'هزینه',
 	};
+
+	changeCurrentPage = (e, page) => {
+		e.preventDefault();
+		console.log(page);
+	};
+	THeadTitle = {
+		id: {title: 'ID', clickable: true},
+		category: {title: 'دسته بندی'},
+		price: {title: 'قیمت'},
+		date: {title: 'تاریخ'},
+		status: {title: 'وضعیت'},
+		opreation: {title: 'عملیات'},
+	};
+
 	render() {
 		const {products} = this.props;
 		const renderProduct = this.check(products);
@@ -60,6 +75,8 @@ class Products extends Component {
 						{showFilter}
 						<div className="card-header">لیست محصولات</div>
 						<div className="card-body">
+							{/* generate table dynamicly */}
+							{/* <Table theadData={this.THeadTitle} tbodyData={products} /> */}
 							<table className="table table-bordered table-hover table-striped text-center">
 								<thead>
 									<tr>
@@ -73,6 +90,10 @@ class Products extends Component {
 								</thead>
 								<tbody>{renderProduct}</tbody>
 							</table>
+							<br />
+							<div>
+								<Pagination totalPage={5} currentPage={1} changeCurrentPage={this.changeCurrentPage} />
+							</div>
 						</div>
 					</div>
 				</div>

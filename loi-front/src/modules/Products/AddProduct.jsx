@@ -6,10 +6,10 @@ const Add = ({item}) => {
 	const categories = getCategories();
 	const saveHandler = (e) => {
 		e.preventDefault();
-		const form = document.querySelector('#form');
+		const form = document.querySelector('#productFormID');
 		const formsItem = {
-			// date: moment.from(form.task_title.value, 'fa', 'YYYY/MM/DD').format('YYYY/MM/DD'), //tabdile shamsi be miladi
-			date: moment(form.task_title.value, 'YYYY/MM/DD').locale('fa').format('YYYY/MM/DD'), //tabdile miladi be shamsi
+			// date: moment.from(form.task_date.value, 'fa', 'YYYY/MM/DD').format('YYYY/MM/DD'), //tabdile shamsi be miladi
+			date: moment(form.task_date.value, 'YYYY/MM/DD').locale('fa').format('YYYY/MM/DD'), //tabdile miladi be shamsi
 			category: form.task_category.value,
 			price: form.task_price.value,
 			phone: form.task_mobile.value,
@@ -22,10 +22,10 @@ const Add = ({item}) => {
 		<div>
 			<div className="row">
 				<div className="col">
-					<div className="card" style={list}>
+					<div className="card list">
 						<div className="card-header">ایجاد محصول جدید</div>
 						<div className="card-body">
-							<form id="form">
+							<form id="productFormID">
 								<div className="form-group">
 									<label htmlFor="task_category">دسته بندی</label>
 									<select className="form-control" name="task_category" id="task_category">
@@ -43,8 +43,8 @@ const Add = ({item}) => {
 									<input type="text" className="form-control" name="task_mobile" id="task_mobile" placeholder="مثال : 09121231234" />
 								</div>
 								<div className="form-group">
-									<label htmlFor="task_title">تاریخ</label>
-									<input type="date" className="form-control" name="task_title" id="task_title" placeholder="عنوان وظیفه" />
+									<label htmlFor="task_date">تاریخ</label>
+									<input type="date" className="form-control" name="task_date" id="task_date" placeholder="عنوان وظیفه" />
 								</div>
 								<div className="form-group">
 									هزینه

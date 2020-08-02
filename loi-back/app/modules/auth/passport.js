@@ -14,7 +14,9 @@ exports.passportLocalRegister = () => {
 				passReqToCallback: true,
 			},
 			async (req, email, password, done) => {
+				console.log(email);
 				const findingUser = await findBy('email', email);
+				console.log(findingUser);
 				if (findingUser) {
 					return done(null, false, req.flash('errors', 'the email is already registered'));
 				}
@@ -25,6 +27,7 @@ exports.passportLocalRegister = () => {
 					password,
 					confpass: req.body.confpass,
 				};
+				console.log(user);
 				await hashingPassword(user);
 				const registeredUser = await registerUser(user);
 				if (registeredUser.affectedRows < 1) {
