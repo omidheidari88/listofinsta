@@ -25,7 +25,18 @@ html {
 	height: 100%;
 	font-family: Ubuntu-Regular, sans-serif;
 }
-
+.dark {
+	background-color: #252424;
+	color: rgb(255, 255, 255);
+}
+.white {
+	background-color: #ffffff;
+	color: rgb(31, 30, 30);
+}
+.pink {
+	background-color: #bb5781;
+	color: rgb(240, 220, 237);
+}
 .errors-msg {
 	background-color: #d41872 !important;
 	color: white;

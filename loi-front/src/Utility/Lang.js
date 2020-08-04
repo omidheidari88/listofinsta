@@ -9,6 +9,7 @@ const numbers = {
 	7: '۷',
 	8: '۸',
 	9: '۹',
+	'+': '۰۰',
 };
 
 class Lang {

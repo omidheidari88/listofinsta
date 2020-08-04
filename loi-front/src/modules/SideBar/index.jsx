@@ -1,9 +1,11 @@
 import React, {Component} from 'react';
+import {Link} from 'react-router-dom';
 import {sss} from '../../Partials/style';
 
 export class index extends Component {
 	render() {
 		const {render} = this.props;
+
 		const check = (input) => {
 			render(input);
 		};
@@ -20,11 +22,12 @@ export class index extends Component {
 							<div className="collapse navbar-collapse" id="navbarNav">
 								<ul className="navbar-nav flex-column pr-0">
 									<li className="nav-item">
-										<button className="btn btn-link nav-link border-0" onClick={(e) => check('all')}>
-											<i className="material-icons">account_circle</i>
-											داشبورد
-											<span className="badge badge-success">10</span>
-										</button>
+										<Link to="/">
+											<button className="nav-link">
+												<i className="material-icons">dashboard</i>
+												داشبورد
+											</button>
+										</Link>
 									</li>
 									<li className="nav-item">
 										<button className="nav-link" data-toggle="collapse" aria-expanded="false" data-target="#submenu-2" aria-controls="submenu-2">
@@ -33,14 +36,17 @@ export class index extends Component {
 										<div id="submenu-2" className="collapse submenu">
 											<ul className="nav flex-column">
 												<li className="nav-item">
-													<button className="btn btn-link nav-link border-0" onClick={(e) => check('addCourse')}>
-														ایجاد دوره جدید
-													</button>
+													<Link to="/course/add">
+														<button className="nav-link">ایجاد دوره جدید</button>
+													</Link>
 												</li>
 												<li className="nav-item">
-													<button className="btn btn-link nav-link border-0" onClick={(e) => check('course')}>
-														مدیریت دوره ها
-													</button>
+													<Link to="/course">
+														<button className="nav-link">
+															{/* NOTE when we don't use react router  onClick={(e) => check('course')} */}
+															مدیریت دوره ها
+														</button>
+													</Link>
 												</li>
 											</ul>
 										</div>
@@ -52,28 +58,26 @@ export class index extends Component {
 										<div id="submenu-3" className="collapse submenu">
 											<ul className="nav flex-column">
 												<li className="nav-item">
-													<button className="btn btn-link nav-link border-0" onClick={(e) => check('addProduct')}>
-														ایجاد محصول جدید
-													</button>
+													<Link to="/product/add">
+														<button className="nav-link">ایجاد محصول جدید</button>
+													</Link>
 												</li>
 												<li className="nav-item">
-													<button className="btn btn-link nav-link border-0" onClick={(e) => check('product')}>
-														مدیریت محصول ها
-													</button>
+													<Link to="/product">
+														<button className="nav-link">مدیریت محصول ها</button>
+													</Link>
 												</li>
 											</ul>
 										</div>
 									</li>
 									<li className="nav-item ">
 										<button className="nav-link" data-toggle="collapse" aria-expanded="false" data-target="#submenu-4" aria-controls="submenu-4">
-											<i className="material-icons">monetization_on</i>صورتحساب
+											<i className="material-icons">account_circle</i>کاربران
 										</button>
 										<div id="submenu-4" className="collapse submenu">
 											<ul className="nav flex-column">
 												<li className="nav-item">
-													<a className="nav-link" href="/admin/influencer-profile">
-														فاکتورها
-													</a>
+													<Link to="/user">لیست کاربران</Link>
 												</li>
 											</ul>
 										</div>

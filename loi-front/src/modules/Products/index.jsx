@@ -5,7 +5,6 @@ import Filter from '../../Partials/Filter';
 import FilterSign from '../../Partials/Filter/FilterSign';
 import {list} from '../../Partials/style';
 import Pagination from '../../Partials/Pagination';
-import Table from '../../Partials/Table';
 
 class Products extends Component {
 	constructor(props) {
