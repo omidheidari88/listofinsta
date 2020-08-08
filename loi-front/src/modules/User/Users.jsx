@@ -3,6 +3,7 @@ import {UserContext} from '../store/ContextManager';
 import User from './User';
 import Filter from '../../Partials/Filter';
 import FilterSign from '../../Partials/Filter/FilterSign';
+import TableWithCash from '../HOC/TableWithCash';
 const Users = (props) => {
 	const {history, location} = props;
 	const query = new URLSearchParams(location.search);
@@ -35,7 +36,7 @@ const Users = (props) => {
 		},
 	];
 	const userRender = users.map((data) => <User data={data} metaData={props} />);
-
+	const UserWithLocalData = TableWithCash(User, props, 'product');
 	return (
 		<div>
 			{theme === 'dark' ? (
@@ -47,18 +48,34 @@ const Users = (props) => {
 					<i className="material-icons">toggle_on</i>
 				</button>
 			)}
-			{showFilter ? <Filter items={usersData} /> : <FilterSign item={() => setShowFilter(true)} />}
+			{/* {showFilter ? <Filter items={usersData} /> : <FilterSign item={() => setShowFilter(true)} />} */}
 			<UserContext.Provider value={{theme}}>
-				<table className="table table-bordered table-hover table-striped text-center" style={{width: '70%', height: '50%'}}>
-					<thead>
-						<tr className="dark">
-							<td>pics</td>
-							<td>name</td>
-							<td>link</td>
-						</tr>
-					</thead>
-					<tbody>{userRender}</tbody>
-				</table>
+				<div className="row">
+					<div className="col">
+						<table className="table table-bordered table-hover table-striped text-center" style={{width: '70%', height: '50%'}}>
+							<thead>
+								<tr className="dark">
+									<td>pics</td>
+									<td>name</td>
+									<td>link</td>
+								</tr>
+							</thead>
+							<tbody>{userRender}</tbody>
+						</table>
+					</div>
+					<div className="col">
+						<table className="table table-bordered table-hover table-striped text-center" style={{width: '70%', height: '50%'}}>
+							<thead>
+								<tr className="dark">
+									<td>pics</td>
+									<td>name</td>
+									<td>link</td>
+								</tr>
+							</thead>
+							<tbody>{<UserWithLocalData />}</tbody>
+						</table>
+					</div>
+				</div>
 			</UserContext.Provider>
 		</div>
 	);

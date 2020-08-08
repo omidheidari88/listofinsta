@@ -1,18 +1,28 @@
-// const products = localStorage.getItem('product');
-// const product = JSON.parse(products);
 export const initialState = {items: []};
-export const reducer = (state, action) => {
-	let result = null;
+export const reducer = (state = initialState, action) => {
+	let result = state;
 	switch (action.type) {
 		case 'add':
-			result = addHandler(state, action);
+			result = {...state, items: [...state.items, action.payload]};
 			break;
 		default:
+			result = state;
 			break;
 	}
 	return result;
 };
 
-const addHandler = (state, action) => {
-	return {...state, items: [...state.items, action.payload]};
-};
+//NOTE multi state & multi reducer
+// export const initialState = {
+// 	users: {items: []},
+// 	products: {items: []},
+// 	courses: {items: []},
+// };
+
+// export const reducer = ({users, products, courses}, action) => {
+// 	return {
+// 		users: userReducer(users, action),
+// 		products: productReducer(products, action),
+// 		courses: courseReducer(courses, action),
+// 	};
+// };
