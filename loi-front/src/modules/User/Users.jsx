@@ -1,19 +1,41 @@
 import React, {useState, useEffect} from 'react';
-import userContext from '../../Utility/userContext';
+import {UserContext} from '../store/ContextManager';
 import User from './User';
-
+import Filter from '../../Partials/Filter';
+import FilterSign from '../../Partials/Filter/FilterSign';
 const Users = (props) => {
+	const {history, location} = props;
+	const query = new URLSearchParams(location.search);
+	const [users, setUsers] = useState([]);
+	const [type, setType] = useState('id');
 	const [theme, setTheme] = useState('dark');
-	const [items, setItems] = useState([]);
+	const [showFilter, setShowFilter] = useState(false);
 	useEffect(() => {
-		fetch('https://jsonplaceholder.ir/users')
+		fetch(`https://jsonplaceholder.ir/users`)
 			.then((res) => res.json())
-			.then((dataFetch) => {
-				setItems(dataFetch);
-				// localStorage.setItem('table', JSON.stringify(dataFetch));
-			});
-	}, []);
-	const userRender = items.map((data) => <User data={data} metaData={props} />);
+			.then((dataFetch) => setUsers(dataFetch));
+	}, [users.length]);
+
+	useEffect(() => setUsers(users.sort((a, b) => (a[type] > b[type] ? -1 : 1))), [query.get('sort')]);
+	const filterHandler = () => {
+		history.push({
+			search: new URLSearchParams({
+				sort: 'acse',
+			}).toString(),
+		});
+	};
+	const usersData = [
+		{
+			whenClick: () => filterHandler(),
+			tittle: 'ID',
+		},
+		{
+			whenClick: () => setShowFilter(false),
+			tittle: 'X',
+		},
+	];
+	const userRender = users.map((data) => <User data={data} metaData={props} />);
+
 	return (
 		<div>
 			{theme === 'dark' ? (
@@ -25,7 +47,8 @@ const Users = (props) => {
 					<i className="material-icons">toggle_on</i>
 				</button>
 			)}
-			<userContext.Provider value={theme}>
+			{showFilter ? <Filter items={usersData} /> : <FilterSign item={() => setShowFilter(true)} />}
+			<UserContext.Provider value={{theme}}>
 				<table className="table table-bordered table-hover table-striped text-center" style={{width: '70%', height: '50%'}}>
 					<thead>
 						<tr className="dark">
@@ -36,7 +59,7 @@ const Users = (props) => {
 					</thead>
 					<tbody>{userRender}</tbody>
 				</table>
-			</userContext.Provider>
+			</UserContext.Provider>
 		</div>
 	);
 };

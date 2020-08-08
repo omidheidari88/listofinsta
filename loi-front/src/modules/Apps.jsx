@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useReducer} from 'react';
 import {Switch, Route} from 'react-router-dom';
 import Products from './Products';
 import Courses from './Courses';
@@ -11,30 +11,29 @@ import Header from '../Partials/Header';
 import routes from './Router/routes';
 import User from './User/Users';
 import UserProfile from './User/UserProfile';
+import NotFound from '../Partials/NotFound';
+import {StateManager} from './store/ContextManager';
+
 const Apps = () => {
 	let [productItems, setProductItems] = useState([]);
-	let [users, setUsers] = useState(JSON.parse(localStorage.getItem('users')));
 	let [courseItems, setCourseItems] = useState([]);
 	let [is_loading, setIs_loading] = useState(false);
 	let [type, setType] = useState('all');
-
 	const axios = new Axios();
 	const addProduct = (item) => {
 		setIs_loading(true);
-		setUsers(() => {
-			return [...users, item];
-		});
-		axios
+
+		localStorage.setItem('product', JSON.stringify(item));
+		// state.items.map((item) => {
+		return axios
 			.post('product/add', item)
 			.then((res) => {
 				setProductItems(res.data.item);
 			})
 			.catch((err) => console.log(err))
 			.finally(() => setIs_loading(false));
+		// });
 	};
-	useEffect(() => {
-		localStorage.setItem('users', JSON.stringify(users));
-	}, [users.length]);
 
 	const addCourse = (item) => {
 		setIs_loading(true);
@@ -46,7 +45,6 @@ const Apps = () => {
 			.catch((err) => console.log(err))
 			.finally(() => setIs_loading(false));
 	};
-	const renderUser = users.map((user) => (user === null ? '' : <h1>{user.category}</h1>));
 
 	const componentHandler = (type) => {
 		setType(type);
@@ -116,6 +114,7 @@ const Apps = () => {
 				</Route>
 				<Route path="/user" exact component={User} />
 				<Route path="/user/:id" exact component={UserProfile} />
+				<Route component={NotFound} />
 			</Switch>
 
 			// NOTE switch outside,clean code,but i don't know how to handle the props so it's not working right now
@@ -127,21 +126,22 @@ const Apps = () => {
 		);
 	};
 	return (
-		<div id="wrapper" className="rtl">
-			<div id="container">
-				<Header />
-				<SideBar render={componentHandler} />
-				<div class="dashboard-wrapper mt-3">
-					<div class="dashboard-ecommerce ">
-						<div class="container-fluid dashboard-content  ">
-							{loading}
-							{renderUser}
-							{components()}
+		<StateManager>
+			<div id="wrapper" className="rtl">
+				<div id="container">
+					<Header />
+					<SideBar render={componentHandler} />
+					<div class="dashboard-wrapper mt-3">
+						<div class="dashboard-ecommerce ">
+							<div class="container-fluid dashboard-content  ">
+								{loading}
+								{components()}
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
+		</StateManager>
 	);
 };
 

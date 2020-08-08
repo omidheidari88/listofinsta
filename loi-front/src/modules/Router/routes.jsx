@@ -5,6 +5,7 @@ import AddCourse from '../Courses/AddCourse';
 import AddProduct from '../Products/AddProduct';
 import User from '../User/Users';
 import UserProfile from '../User/UserProfile';
+import NotFound from '../../Partials/NotFound';
 const routes = [
 	{
 		path: '/',
@@ -40,6 +41,9 @@ const routes = [
 		path: '/user/:id',
 		exact: true,
 		component: UserProfile,
+	},
+	{
+		component: NotFound,
 	},
 ];
 

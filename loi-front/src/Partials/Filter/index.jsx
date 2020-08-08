@@ -1,21 +1,16 @@
 import React from 'react';
-const Filter = ({filtering, title}) => {
+
+const Filter = ({items}) => {
+	const itemsRender = items.map((item) => {
+		return (
+			<button onClick={() => item.whenClick()} type="button" className="btn btn-sm btn-outline-info border-0 m-0  list">
+				{item.tittle}
+			</button>
+		);
+	});
 	return (
 		<div class="d-flex flex-row-reverse align-items-start">
-			<div class="p-0 rounded-right list">
-				<button onClick={() => filtering('all')} type="button" className="btn btn-sm btn-outline-info border-0 m-0  list">
-					{title.all}
-				</button>
-				<button onClick={() => filtering('cost')} type="button" className="btn btn-sm btn-outline-info border-0 m-0 list">
-					{title.cost}
-				</button>
-				<button onClick={() => filtering('income')} type="button" className="btn btn-sm btn-outline-info border-0 m-0 list">
-					{title.income}
-				</button>
-				<button onClick={() => filtering('sign')} type="button" className="btn btn-sm btn-info border-0 m-0  list">
-					x
-				</button>
-			</div>
+			<div class="p-0 rounded-right list">{itemsRender}</div>
 		</div>
 	);
 };

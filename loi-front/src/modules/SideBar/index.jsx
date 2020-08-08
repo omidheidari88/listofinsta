@@ -77,7 +77,7 @@ export class index extends Component {
 										<div id="submenu-4" className="collapse submenu">
 											<ul className="nav flex-column">
 												<li className="nav-item">
-													<Link to="/user">لیست کاربران</Link>
+													<Link to={'/user'}>لیست کاربران</Link>
 												</li>
 											</ul>
 										</div>

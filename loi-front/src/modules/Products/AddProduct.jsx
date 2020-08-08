@@ -1,8 +1,9 @@
-import React from 'react';
+import React, {useContext, useReducer} from 'react';
 import {getCategories} from '../../Utility/Category';
 import moment from 'jalali-moment';
-import {list} from '../../Partials/style';
+import {StateContext} from '../store/ContextManager';
 const Add = ({item}) => {
+	const [state, dispatch] = useContext(StateContext);
 	const categories = getCategories();
 	const saveHandler = (e) => {
 		e.preventDefault();
@@ -15,6 +16,7 @@ const Add = ({item}) => {
 			phone: form.task_mobile.value,
 			status: form.task_status.value,
 		};
+		dispatch({type: 'add', payload: formsItem});
 		return item(formsItem);
 	};
 
