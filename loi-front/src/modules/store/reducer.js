@@ -1,9 +1,9 @@
-export const initialState = {items: []};
+export const initialState = {users: []};
 export const reducer = (state = initialState, action) => {
 	let result = state;
 	switch (action.type) {
 		case 'add':
-			result = {...state, items: [...state.items, action.payload]};
+			result = {...state, users: [...state.users, action.payload]};
 			break;
 		default:
 			result = state;
