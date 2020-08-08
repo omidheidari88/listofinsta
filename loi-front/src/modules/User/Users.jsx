@@ -1,11 +1,12 @@
 import React, {useState, useEffect} from 'react';
 import {UserContext} from '../store/ContextManager';
+import {connect} from 'react-redux';
 import User from './User';
 import Filter from '../../Partials/Filter';
 import FilterSign from '../../Partials/Filter/FilterSign';
 import TableWithCash from '../HOC/TableWithCash';
 const Users = (props) => {
-	const {history, location} = props;
+	const {history, location, userState, addUser} = props;
 	const query = new URLSearchParams(location.search);
 	const [users, setUsers] = useState([]);
 	const [type, setType] = useState('id');
@@ -14,7 +15,8 @@ const Users = (props) => {
 	useEffect(() => {
 		fetch(`https://jsonplaceholder.ir/users`)
 			.then((res) => res.json())
-			.then((dataFetch) => setUsers(dataFetch));
+			.then((dataFetch) => setUsers(dataFetch))
+			.finally(() => addUser(users));
 	}, [users.length]);
 
 	useEffect(() => setUsers(users.sort((a, b) => (a[type] > b[type] ? -1 : 1))), [query.get('sort')]);
@@ -35,7 +37,8 @@ const Users = (props) => {
 			tittle: 'X',
 		},
 	];
-	const userRender = users.map((data) => <User data={data} metaData={props} />);
+
+	const userRender = userState.map((data) => <User data={data} metaData={props} />);
 	const UserWithLocalData = TableWithCash(User, props, 'product');
 	return (
 		<div>
@@ -63,7 +66,7 @@ const Users = (props) => {
 							<tbody>{userRender}</tbody>
 						</table>
 					</div>
-					<div className="col">
+					{/* <div className="col">
 						<table className="table table-bordered table-hover table-striped text-center" style={{width: '70%', height: '50%'}}>
 							<thead>
 								<tr className="dark">
@@ -74,11 +77,27 @@ const Users = (props) => {
 							</thead>
 							<tbody>{<UserWithLocalData />}</tbody>
 						</table>
-					</div>
+					</div> */}
 				</div>
 			</UserContext.Provider>
 		</div>
 	);
 };
 
-export default Users;
+const State = (state) => {
+	return {
+		userState: state.users,
+	};
+};
+const Dispatcher = (dispatch) => {
+	return {
+		addUser: (payload) => {
+			dispatch({
+				type: 'add',
+				payload,
+			});
+		},
+	};
+};
+
+export default connect(State, Dispatcher)(Users);
