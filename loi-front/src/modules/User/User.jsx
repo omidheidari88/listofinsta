@@ -1,26 +1,80 @@
-import React, {useContext} from 'react';
+import React, {useContext, useState, useEffect} from 'react';
 import {Link} from 'react-router-dom';
-import {UserContext} from '../store/ContextManager';
-
-const Td = ({metaData, data}) => {
+import {UserContext} from '../store/context/ContextManager';
+import {connect} from 'react-redux';
+import {actions} from '../actions';
+import Edit from '../Modal/Edit';
+const Td = ({metaData, data, updateUser, successUpdate, deleteUser}) => {
 	const {match} = metaData;
+	const [editable, setEditable] = useState(false);
 	const url = match.url;
-	const {id, name, avatar} = data;
+	const {name, avatar, _id} = data;
 	const {theme} = useContext(UserContext);
+	const updateUserName = (e) => {
+		e.preventDefault();
+		updateUser({
+			id: _id,
+			newName: document.querySelector(`#UID-${_id}`).value,
+		});
+		if (successUpdate) setEditable(false);
+	};
+
+	const editInput = !editable ? (
+		name
+	) : (
+		<div>
+			<input id={`UID-${_id}`} type="text" defaultValue={name} style={{backgroundColor: '#ffeeef'}} className="m-2 p-2" />
+			<button className="material-icons btn btn-success btn-sm m-l-2" onClick={(e) => updateUserName(e)}>
+				check
+			</button>
+			<button className="material-icons btn btn-danger btn-sm " onClick={(e) => setEditable(false)}>
+				close
+			</button>
+		</div>
+	);
 
 	return (
 		<tr>
 			<td className={theme}>
 				<img style={{width: '60px', height: '60px'}} src={avatar} alt="" />
 			</td>
-			<td className={theme}>{name}</td>
+			<td className={theme}>{editInput}</td>
 			<td className={theme}>
-				<Link to={`${url}/${id}`}>
+				<Link to={`${url}`}>
 					<i className="material-icons">link</i>
 				</Link>
+			</td>
+			<td className={theme} onClick={(e) => setEditable(true)}>
+				<button class="material-icons" style={{color: '#22eeef'}}>
+					edit
+				</button>
+			</td>
+			<td className={theme} onClick={(e) => deleteUser({id: _id})}>
+				<button class="material-icons" style={{color: '#22eeef'}}>
+					delete
+				</button>
 			</td>
 		</tr>
 	);
 };
 
-export default Td;
+const mapState = (state) => ({userState: state.users.items, messages: state.users.messages, errorMessages: state.users.errorMessages, successUpdate: state.users.successUpdate});
+
+const mapDispatch = (dispatch) => {
+	return {
+		updateUser: (payload) => {
+			dispatch({
+				type: actions.UPDATE_USER,
+				payload,
+			});
+		},
+		deleteUser: (payload) => {
+			dispatch({
+				type: actions.DELETE_USER,
+				payload,
+			});
+		},
+	};
+};
+
+export default connect(mapState, mapDispatch)(Td);

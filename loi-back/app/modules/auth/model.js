@@ -21,6 +21,11 @@ exports.findBy = async (key, value) => {
 	const [records] = await db.query(`SELECT * FROM users WHERE ${key}=? LIMIT 1 `, [value]);
 	return records[0];
 };
+exports.userModel = async () => {
+	const db = await connection();
+	const [user] = await db.query('SELECT * from `users`');
+	return user;
+};
 //-------------------MONGO QUERY--------------
 exports.all = async (params = null) => {
 	const db = await connectionMongo();
@@ -31,7 +36,12 @@ exports.all = async (params = null) => {
 
 exports.create = async (params) => {
 	const db = await connectionMongo();
-	const result = await db.collection('users').insertOne(params);
+	const result = await db.collection('test').insertOne(params);
+	return result;
+};
+exports.find = async (params) => {
+	const db = await connectionMongo();
+	const result = await db.collection('test').findOne(params);
 	return result;
 };
 exports.update = async (data) => {

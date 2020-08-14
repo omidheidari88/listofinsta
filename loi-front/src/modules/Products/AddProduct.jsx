@@ -1,7 +1,7 @@
 import React, {useContext, useReducer} from 'react';
 import {getCategories} from '../../Utility/Category';
 import moment from 'jalali-moment';
-import {StateContext} from '../store/ContextManager';
+import {StateContext} from '../store/context/ContextManager';
 const Add = ({item}) => {
 	const [state, dispatch] = useContext(StateContext);
 	const categories = getCategories();

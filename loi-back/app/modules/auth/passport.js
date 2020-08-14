@@ -1,10 +1,10 @@
-const {findBy, registerUser} = require('./model');
+const {findBy, registerUser, create} = require('./model');
 const LocalStrategy = require('passport-local').Strategy;
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 const {hashingPassword, verifyHashedPassword, getRes} = require('./middleware');
 const passport = require('passport');
 const {sign} = require('../../services/token');
-exports.passportLocalRegister = () => {
+exports.passportLocalRegister = async () => {
 	passport.use(
 		'local-register',
 		new LocalStrategy(
@@ -14,37 +14,33 @@ exports.passportLocalRegister = () => {
 				passReqToCallback: true,
 			},
 			async (req, email, password, done) => {
-				console.log(email);
 				const findingUser = await findBy('email', email);
-				console.log(findingUser);
 				if (findingUser) {
 					return done(null, false, req.flash('errors', 'the email is already registered'));
 				}
 				const user = {
-					first_name: req.body.first_name,
-					last_name: req.body.last_name,
+					name: `${req.body.first_name}-${req.body.last_name}`,
+					// last_name: req.body.last_name,
 					email,
 					password,
 					confpass: req.body.confpass,
 				};
-				console.log(user);
+
 				await hashingPassword(user);
+
 				const registeredUser = await registerUser(user);
+
 				if (registeredUser.affectedRows < 1) {
 					return done(null, false, req.flash('errors', 'user can not register/please try later'));
 				}
+
+				const registeredUserToMongo = await create(user);
 				const userRegistered = await findBy('id', registeredUser.insertId);
+
 				return done(null, userRegistered, req.flash('success', 'you are successfully registered'));
 			},
 		),
 	);
-	passport.serializeUser((user, done) => {
-		return done(null, user.id);
-	});
-	passport.deserializeUser(async (id, done) => {
-		const user = await findBy('id', id);
-		return done(null, user);
-	});
 };
 exports.passportLocalLogin = () => {
 	passport.use(

@@ -44,7 +44,7 @@ exports.remove = async (req, res) => {
 // exports.deleteUser = async (req, res) => {
 // 	const uid = req.params.id;
 // 	const result = await deleteUserModel(uid);
-// 	console.log(result);
+
 // 	if (result.affectedRows > 0) {
 // 		res.send({uid, result});
 // 	}

@@ -1,23 +1,25 @@
 import React from 'react';
-
-const Register = ({changeType, item, email, password, confpass, first_name, last_name}) => {
+import {connect} from 'react-redux';
+import {actions} from '../actions';
+const Register = ({changeType, registerUser, messages, errorMessages}) => {
 	const postItems = (e) => {
 		e.preventDefault();
 		const form = document.querySelector('#form');
-		const formsItem = {
+		const userInfo = {
 			first_name: form.first_name.value,
 			last_name: form.last_name.value,
 			email: form.email.value,
 			password: form.password.value,
 			confpass: form.confpass.value,
 		};
-		return item(formsItem);
+		return registerUser(userInfo);
 	};
 	return (
 		<div className="limiter">
 			<div className="container-login100 bg-auth">
 				<div className="wrap-login100 p-t-30 p-b-50">
 					<span className="login100-form-title p-b-41">Register</span>
+					<span> {errorMessages ? <span className="btn btn-danger">{errorMessages}</span> : messages}</span>
 					<form id="form" className="login100-form validate-form p-b-33 p-t-5" onSubmit={(e) => postItems(e)}>
 						<div className="wrap-input100 validate-input" data-validate="Enter firstname">
 							<input type="text" className="input100" name="first_name" id="first_name" placeholder="first name" /> {/*value={typeof first_name != 'undefined' ? first_name : ''}*/}
@@ -60,4 +62,17 @@ const Register = ({changeType, item, email, password, confpass, first_name, last
 	);
 };
 
-export default Register;
+const mapState = (state) => ({userState: state.users.items, messages: state.users.messages, errorMessages: state.users.errorMessages});
+
+const mapDispatch = (dispatch) => {
+	return {
+		registerUser: (payload) => {
+			dispatch({
+				type: actions.REGISTER_USER,
+				payload,
+			});
+		},
+	};
+};
+
+export default connect(mapState, mapDispatch)(Register);

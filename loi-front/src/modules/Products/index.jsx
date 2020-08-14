@@ -5,7 +5,7 @@ import Filter from '../../Partials/Filter';
 import FilterSign from '../../Partials/Filter/FilterSign';
 import {list} from '../../Partials/style';
 import Pagination from '../../Partials/Pagination';
-import {StateContext} from '../store/ContextManager';
+import {StateContext} from '../store/context/ContextManager';
 
 const Products = () => {
 	const [state, dispatch] = useContext(StateContext);
@@ -29,7 +29,7 @@ const Products = () => {
 	};
 
 	const showFilter = filter === 'filter' ? <Filter filtering={filterHandler} title={titles} /> : <FilterSign filtering={filterHandler} />;
-	const renderItems = state.items.length > 0 ? state.items.map((product) => <Item {...product} />) : <NoItem col="6" />;
+	const renderItems = [] > 0 ? state.items.map((product) => <Item {...product} />) : <NoItem col="6" />;
 	return (
 		<div className="row">
 			<div className="col">

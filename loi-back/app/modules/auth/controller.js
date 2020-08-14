@@ -1,4 +1,4 @@
-const {findBy} = require('./model');
+const {findBy, create, find, userModel} = require('./model');
 const {validationResult} = require('express-validator');
 const passport = require('passport');
 const {googleRecaptcha, verifyHashedPassword, verifyRecaptcha} = require('./middleware');
@@ -10,7 +10,6 @@ exports.showLogin = async (req, res) => {
 	res.render('auth/login', {message});
 };
 exports.doLogin = async (req, res, next) => {
-	console.log(req.body);
 	const {email, password} = req.body;
 	res.send({message: 'LOGIN'});
 	// const messages = [];
@@ -45,6 +44,7 @@ exports.showRegister = async (req, res) => {
 
 exports.doRegister = async (req, res, next) => {
 	const {first_name, last_name, email, password, confpass} = req.body;
+
 	const messages = [];
 	const result = validationResult(req);
 	const errors = result.array();
@@ -60,13 +60,23 @@ exports.doRegister = async (req, res, next) => {
 	// 	req.flash('errors', messages);
 	// }
 	if (messages.length > 0) {
-		return res.render('auth/register', {recaptcha, messages, first_name, last_name, password, confpass, email});
+		// return res.render('auth/register', {recaptcha, messages, first_name, last_name, password, confpass, email});
+		messages.map((message) => res.status(200).send({message: message}));
 	} else {
-		passport.authenticate('local-register', {
-			successRedirect: res.send({message: 'REGISTER success'}),
-			failureRedirect: res.send({message: 'REGISTER failed'}),
-			failureFlash: true,
-		})(req, res, next);
+		passport.authenticate(
+			'local-register',
+			{
+				// successRedirect: res.status(200).send({message: 'REGISTER success'}),
+				// failureRedirect: res.status(400).send({message: 'REGISTER failed'}),
+				failureFlash: true,
+			},
+			async () => {
+				// const findUser = await find({email});
+				const findUser = await findBy('email', email);
+
+				res.status(200).send({item: findUser, message: 'REGISTER success'});
+			},
+		)(req, res, next);
 	}
 };
 exports.logout = async (req, res) => {

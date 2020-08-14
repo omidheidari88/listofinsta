@@ -12,7 +12,7 @@ import routes from './Router/routes';
 import User from './User/Users';
 import UserProfile from './User/UserProfile';
 import NotFound from '../Partials/NotFound';
-import {StateManager} from './store/ContextManager';
+import {StateManager} from './store/context/ContextManager';
 
 const Apps = () => {
 	let [productItems, setProductItems] = useState([]);
