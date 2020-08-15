@@ -1,25 +1,22 @@
-import React, {useContext, useReducer} from 'react';
+import React from 'react';
 import {getCategories} from '../../Utility/Category';
+import {connect} from 'react-redux';
+import {actions} from '../actions';
 import moment from 'jalali-moment';
-import {StateContext} from '../store/context/ContextManager';
-const Add = ({item}) => {
-	const [state, dispatch] = useContext(StateContext);
+const Add = ({addProduct}) => {
 	const categories = getCategories();
 	const saveHandler = (e) => {
 		e.preventDefault();
 		const form = document.querySelector('#productFormID');
 		const formsItem = {
-			// date: moment.from(form.task_date.value, 'fa', 'YYYY/MM/DD').format('YYYY/MM/DD'), //tabdile shamsi be miladi
 			date: moment(form.task_date.value, 'YYYY/MM/DD').locale('fa').format('YYYY/MM/DD'), //tabdile miladi be shamsi
 			category: form.task_category.value,
 			price: form.task_price.value,
 			phone: form.task_mobile.value,
 			status: form.task_status.value,
 		};
-		dispatch({type: 'add', payload: formsItem});
-		return item(formsItem);
+		return addProduct(formsItem);
 	};
-
 	return (
 		<div>
 			<div className="row">
@@ -73,4 +70,23 @@ const Add = ({item}) => {
 	);
 };
 
-export default Add;
+const mapDispatch = (dispatch) => {
+	return {
+		addProduct: (payload) => {
+			dispatch({
+				type: actions.ADD_PRODUCT,
+				payload,
+			});
+		},
+	};
+};
+
+export default connect(null, mapDispatch)(Add);
+
+//NOTE if we wanted to use useConntext instead of saga
+// import {StateContext} from '../store/context/ContextManager';
+// const [state, dispatch] = useContext(StateContext);
+// dispatch({type: 'add', payload: formsItem});
+
+//NOTE tabdile shamsi be miladi
+// date: moment.from(form.task_date.value, 'fa', 'YYYY/MM/DD').format('YYYY/MM/DD')

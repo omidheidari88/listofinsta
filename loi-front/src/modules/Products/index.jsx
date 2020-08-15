@@ -1,5 +1,7 @@
 import React, {useContext, useEffect} from 'react';
 import Item from './Item';
+import {connect} from 'react-redux';
+import {actions} from '../actions';
 import NoItem from '../../Partials/Filter/NoItem';
 import Filter from '../../Partials/Filter';
 import FilterSign from '../../Partials/Filter/FilterSign';
@@ -70,4 +72,17 @@ const Products = () => {
 		</div>
 	);
 };
-export default Products;
+const mapState = (state) => ({productState: state.products.items, messages: state.products.messages, errorMessages: state.products.errorMessages});
+
+const mapDispatch = (dispatch) => {
+	return {
+		addProduct: (payload) => {
+			dispatch({
+				type: actions.FETCH_USER,
+				payload,
+			});
+		},
+	};
+};
+
+export default connect(mapState, mapDispatch)(Products);
