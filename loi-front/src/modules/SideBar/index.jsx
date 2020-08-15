@@ -4,12 +4,6 @@ import {sss} from '../../Partials/style';
 
 export class index extends Component {
 	render() {
-		const {render} = this.props;
-
-		const check = (input) => {
-			render(input);
-		};
-
 		return (
 			<div>
 				<div className="nav-left-sidebar sidebar-dark ml-0 " style={sss}>

@@ -1,13 +1,16 @@
 import React, {Component} from 'react';
-import Modals from '../../modules/Modal/index';
+import {actions} from '../../modules/actions';
+import {connect} from 'react-redux';
+
 export class index extends Component {
 	render() {
+		const {updateModal} = this.props;
 		return (
 			<div>
 				<nav className="fixed-top login100-form-btn" style={{color: 'black'}}>
 					<div className=" m-t-2 " style={{color: 'black'}}>
-						<button type="submit" style={{color: 'white'}}>
-							<Modals />
+						<button type="submit" style={{color: 'white'}} onClick={(e) => updateModal({status: true, component: 'Register'})}>
+							List of Insta
 						</button>
 					</div>
 
@@ -30,4 +33,14 @@ export class index extends Component {
 	}
 }
 
-export default index;
+const mapDispatch = (dispatch) => {
+	return {
+		updateModal: (payload) => {
+			dispatch({
+				type: actions.UPDATE_MODAL,
+				payload,
+			});
+		},
+	};
+};
+export default connect(null, mapDispatch)(index);

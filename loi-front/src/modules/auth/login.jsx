@@ -1,6 +1,7 @@
 import React from 'react';
-
-const Login = ({changeType, item}) => {
+import {connect} from 'react-redux';
+import {actions} from '../actions';
+const Login = ({updateModal}) => {
 	const postItems = (e) => {
 		e.preventDefault();
 		const form = document.querySelector('#form');
@@ -8,7 +9,7 @@ const Login = ({changeType, item}) => {
 			email: form.email.value,
 			password: form.password.value,
 		};
-		return item(formsItem);
+		return formsItem;
 	};
 
 	return (
@@ -62,7 +63,7 @@ const Login = ({changeType, item}) => {
 							<p className="mt-3">Don't Have a account?</p>
 						</div>
 					</form>
-					<button className="btn btn-info" onClick={() => changeType('register')}>
+					<button className="btn btn-info" onClick={() => updateModal({status: true, component: 'Register'})}>
 						Sign up
 					</button>
 				</div>
@@ -71,4 +72,15 @@ const Login = ({changeType, item}) => {
 	);
 };
 
-export default Login;
+const mapDispatch = (dispatch) => {
+	return {
+		updateModal: (payload) => {
+			dispatch({
+				type: actions.UPDATE_MODAL,
+				payload,
+			});
+		},
+	};
+};
+
+export default connect(null, mapDispatch)(Login);

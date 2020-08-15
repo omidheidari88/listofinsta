@@ -1,7 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import {UserContext} from '../store/context/ContextManager';
 import {connect} from 'react-redux';
-import User from './User';
+import FetchUser from './FetchUser';
+import MongoUser from './MongoUser';
 import Filter from '../../Partials/Filter';
 import FilterSign from '../../Partials/Filter/FilterSign';
 import TableWithCash from '../HOC/TableWithCash';
@@ -40,8 +41,8 @@ const Users = (props) => {
 		},
 	];
 
-	const userRender = users.map((data) => <User data={data} metaData={props} />);
-	const userRenderState = userState.map((data) => <User data={data} metaData={props} />);
+	const jsonPlaceHolderUsers = users.map((data) => <FetchUser data={data} metaData={props} />);
+	const monngoUsers = userState.map((data) => <MongoUser data={data} metaData={props} />);
 	// const UserWithLocalData = TableWithCash(User, props, 'product');
 	return (
 		<div>
@@ -57,31 +58,21 @@ const Users = (props) => {
 			{/* {showFilter ? <Filter items={usersData} /> : <FilterSign item={() => setShowFilter(true)} />} */}
 			<UserContext.Provider value={{theme}}>
 				<div className="row">
-					{/* <div className="col">
+					<div className="col">
 						<table className="table table-bordered table-hover table-striped text-center" style={{width: '70%', height: '50%'}}>
-							<thead>
-								<tr className="dark">
-									<td>pics</td>
-									<td>name</td>
-									<td>link</td>
-									<td>edit</td>
-									<td>delete</td>
-								</tr>
-							</thead>
-							<tbody>{userRender}</tbody>
+							<tbody>{jsonPlaceHolderUsers}</tbody>
 						</table>
-					</div> */}
+					</div>
 					<div className="col">
 						<button className="btn btn-warning" onClick={() => addUser()}>
 							<span>
+								Get Data From MongoDB
 								<span class="material-icons">{messages}</span>
-								<br />
-								Database Data
 							</span>
 						</button>
 						{errorMessages ? <span className="btn btn-danger">{errorMessages}</span> : ''}
 						<table className="table table-bordered table-hover table-striped text-center" style={{width: '70%', height: '50%'}}>
-							<tbody>{userRenderState}</tbody>
+							<tbody>{monngoUsers}</tbody>
 						</table>
 					</div>
 					{/* <div className="col">

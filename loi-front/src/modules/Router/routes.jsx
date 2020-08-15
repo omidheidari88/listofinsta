@@ -1,16 +1,19 @@
-import React from 'react';
+import Dashboard from '../Dashboard';
 import Products from '../Products';
 import Courses from '../Courses';
 import AddCourse from '../Courses/AddCourse';
 import AddProduct from '../Products/AddProduct';
 import User from '../User/Users';
 import UserProfile from '../User/UserProfile';
+import Register from '../auth/Register';
+import Login from '../auth/Login';
 import NotFound from '../../Partials/NotFound';
+import EditUserList from '../User/EditUser';
 const routes = [
 	{
 		path: '/',
 		exact: true,
-		component: <>Products Courses</>,
+		component: Dashboard,
 	},
 	{
 		path: '/course',
@@ -41,6 +44,15 @@ const routes = [
 		path: '/user/:id',
 		exact: true,
 		component: UserProfile,
+	},
+	{
+		component: EditUserList,
+	},
+	{
+		component: Register,
+	},
+	{
+		component: Login,
 	},
 	{
 		component: NotFound,

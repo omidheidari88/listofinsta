@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {actions} from '../actions';
-const Register = ({changeType, registerUser, messages, errorMessages}) => {
+const Register = ({updateModal, registerUser, messages, errorMessages}) => {
 	const postItems = (e) => {
 		e.preventDefault();
 		const form = document.querySelector('#form');
@@ -51,7 +51,7 @@ const Register = ({changeType, registerUser, messages, errorMessages}) => {
 					<div className="login110-form p-b-33 p-t-5 mt-4">
 						<p className="mt-3">
 							Have a account?
-							<button className="btn btn-info" onClick={() => changeType('login')}>
+							<button className="btn btn-info" onClick={() => updateModal({status: true, component: 'Login'})}>
 								Login
 							</button>
 						</p>
@@ -69,6 +69,12 @@ const mapDispatch = (dispatch) => {
 		registerUser: (payload) => {
 			dispatch({
 				type: actions.REGISTER_USER,
+				payload,
+			});
+		},
+		updateModal: (payload) => {
+			dispatch({
+				type: actions.UPDATE_MODAL,
 				payload,
 			});
 		},
