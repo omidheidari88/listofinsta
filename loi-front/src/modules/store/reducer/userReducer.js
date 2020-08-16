@@ -24,7 +24,7 @@ const reducer = (userState, action) => {
 		case actions.UPDATE_USER_SUCCESS:
 			result = {
 				...userState,
-				items: userState.items.map((item) => (item._id === action.payload.user.id ? item.name === action.payload.user.newName : item)),
+				items: userState.items.map((item) => (item._id === action.payload.user.id ? (item.name === action.payload.user.newName, item.email === action.payload.user.email) : item)),
 				messages: action.payload.messages,
 				successUpdate: action.payload.success,
 			};

@@ -6,6 +6,7 @@ import Register from '../auth/Register';
 import Login from '../auth/Login';
 import EditUser from '../User/EditUser';
 const Modals = ({modal, updateModal}) => {
+	console.log(modal);
 	const currentComponent = (modal) => {
 		let result = '';
 		switch (modal.component) {
@@ -16,7 +17,7 @@ const Modals = ({modal, updateModal}) => {
 				result = <Login />;
 				break;
 			case 'EditUser':
-				result = <EditUser />;
+				result = <EditUser userData={modal.userData} />;
 				break;
 
 			default:
@@ -24,8 +25,10 @@ const Modals = ({modal, updateModal}) => {
 		}
 		return result;
 	};
+	const ltrStyle = {'direction': 'ltr', 'text-align': 'left', 'zIndex': 9999};
+	const rtlStyle = {'direction': 'rtl', 'text-align': 'right', 'zIndex': 9999};
 	return (
-		<div style={{'direction': 'ltr', 'text-align': 'left', 'zIndex': 9999}}>
+		<div style={modal.component === 'EditUser' ? rtlStyle : ltrStyle}>
 			<div className={`modal-wrapper modalStatus-${modal.status === true ? 'show' : 'hidden'}`}>
 				<div className="modal-overlay">
 					<button className="btn btn-danger btn-sm" onClick={(e) => updateModal({status: false})}>

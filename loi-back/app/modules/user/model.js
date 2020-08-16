@@ -48,7 +48,7 @@ exports.update = async (item) => {
 	const result = await db.collection('test').updateOne(
 		{_id: objectId(item.id)},
 		{
-			$set: {name: item.newName},
+			$set: {name: item.username, email: item.email},
 		},
 	);
 	return result.modifiedCount > 0;

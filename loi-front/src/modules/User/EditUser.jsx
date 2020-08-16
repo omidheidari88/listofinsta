@@ -1,18 +1,33 @@
-import React from 'react';
-
-const EditUserList = () => {
+import React, {useEffect, useState} from 'react';
+import {connect} from 'react-redux';
+import {actions} from '../actions';
+const EditUserList = ({userData, updateUser}) => {
+	const [editable, setEditable] = useState(false);
+	const updateUserData = (e) => {
+		e.preventDefault();
+		const form = document.querySelector('#validationform');
+		const formsItem = {
+			id: userData._id,
+			username: form.username.value,
+			email: form.email.value,
+			// price: form.task_price.value,
+			// phone: form.task_mobile.value,
+			// status: form.task_status.value,
+		};
+		return updateUser(formsItem);
+	};
 	return (
 		<div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" style={{padding: '0px'}}>
 			<div className="card">
-				<h5 className="card-header">ویرایش دوره</h5>
+				<h5 className="card-header"> user ID :{userData._id} </h5>
 				<div className="card-body">
 					<form id="validationform" data-parsley-validate="" novalidate="" action="/admin/edit/ course.course_id ?method=POST" method="POST" enctype="multipart/form-data">
 						<div className="form-group row">
 							<div className="col">
-								<label for="title" className="control-label font-weight-bold">
-									عنوان دوره
+								<label for="username" className="control-label font-weight-bold">
+									نام کاربر
 								</label>
-								<input type="text" className="form-control" name="title" id="title" value="course.title" />
+								<input type="text" className="form-control" name="username" id="username" defaultValue={userData.name} />
 							</div>
 						</div>
 						<div className="form-group row">
@@ -29,12 +44,10 @@ const EditUserList = () => {
 						</div>
 						<div className="form-group row">
 							<div className="col">
-								<label for="descript" className="control-label font-weight-bold">
-									متن
+								<label for="email" className="control-label font-weight-bold">
+									ایمیل
 								</label>
-								<textarea rows="5" className="form-control" name="descript" id="descript">
-									course.descript
-								</textarea>
+								<input type="email" className="form-control" name="email" id="email" defaultValue={userData.email} />
 							</div>
 						</div>
 						<div className="form-group row">
@@ -59,8 +72,8 @@ const EditUserList = () => {
 							<div className="col-sm-3">
 								size
 								<label className="control-label">
-									<a href="<%-image">
-										<img src="<%-image" alt="" width="50%" />
+									<a href="#/">
+										<img src={userData.avatar} alt="" width="100%" />
 									</a>
 								</label>
 							</div>
@@ -83,8 +96,11 @@ const EditUserList = () => {
 
 						<div className="form-group row text-right">
 							<div className="col col-sm-10 col-lg-9 offset-sm-1 offset-lg-0">
-								<button type="submit" className="btn btn-space btn-primary">
-									ارسال
+								<button className="material-icons btn btn-success btn-sm m-l-2" onClick={(e) => updateUserData(e)}>
+									check ارسال
+								</button>
+								<button className="material-icons btn btn-danger btn-sm " onClick={(e) => setEditable(false)}>
+									close لغو
 								</button>
 							</div>
 						</div>
@@ -95,4 +111,15 @@ const EditUserList = () => {
 	);
 };
 
-export default EditUserList;
+const mapDispatch = (dispatch) => {
+	return {
+		updateUser: (payload) => {
+			dispatch({
+				type: actions.UPDATE_USER,
+				payload,
+			});
+		},
+	};
+};
+
+export default connect(null, mapDispatch)(EditUserList);

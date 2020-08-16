@@ -4,7 +4,7 @@ import {UserContext} from '../store/context/ContextManager';
 import {connect} from 'react-redux';
 import {actions} from '../actions';
 
-const Td = ({metaData, data, updateUser, successUpdate, deleteUser, updateModal}) => {
+const Td = ({metaData, data, updateUser, successUpdate, deleteUser, updateModal, userState}) => {
 	const {match} = metaData;
 	const [editable, setEditable] = useState(false);
 	const url = match.url;
@@ -43,16 +43,6 @@ const Td = ({metaData, data, updateUser, successUpdate, deleteUser, updateModal}
 				<Link to={`${url}/${id}`}>
 					<i className="material-icons">link</i>
 				</Link>
-			</td>
-			<td className={theme} onClick={(e) => updateModal({status: true, component: 'EditUser'})}>
-				<button class="material-icons" style={{color: 'rgb(148, 150, 151)'}}>
-					edit
-				</button>
-			</td>
-			<td className={theme} onClick={(e) => deleteUser({id: id})}>
-				<button class="material-icons" style={{color: 'rgb(148, 150, 151)'}}>
-					delete
-				</button>
 			</td>
 		</tr>
 	);
