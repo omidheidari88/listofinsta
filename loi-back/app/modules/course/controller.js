@@ -7,7 +7,7 @@ exports.getItem = async (req, res) => {
 exports.store = async (req, res) => {
 	const items = req.body;
 	const id = await saveCourse(items);
-	res.status(201).send({message: 'items saved to DB', item: {...items, course_id: id}});
+	res.status(201).send({message: 'items saved to DB', items: {...items, course_id: id}});
 };
 exports.remove = async (req, res) => {
 	const id = req.params.id;

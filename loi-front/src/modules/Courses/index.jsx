@@ -1,63 +1,24 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import {actions} from '../actions';
 import Item from './Item';
 import NoItem from '../../Partials/Filter/NoItem';
-import Filter from '../../Partials/Filter';
-import FilterSign from '../../Partials/Filter/FilterSign';
+// import Filter from '../../Partials/Filter';
+// import FilterSign from '../../Partials/Filter/FilterSign';
 import {list} from '../../Partials/style';
 
-export class Table2 extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			filter: 'sign',
-		};
+export class Courses extends Component {
+	componentDidMount() {
+		return this.props.fetchCourse();
 	}
-	check = (courses) => {
-		if (courses.length > 0) {
-			return (
-				courses
-					// .filter((course) => {
-					// 	if (this.state.filter === 'all') return true;
-					// 	else {
-					// 		const filterType = this.state.filter === 'income' ? 2 : 1;
-					// 		return course.status === filterType;
-					// 	}
-					// })
-					.map((course) => <Item course={course} />)
-			);
-		}
-		return <NoItem col="8" />;
-	};
-	filterHandler = (filter) => {
-		this.setState((prev) => {
-			return {
-				...prev,
-				filter,
-			};
-		});
-	};
-	titles = {
-		all: 'همه',
-		income: 'درآمد',
-		cost: 'هزینه',
-	};
+
 	render() {
-		const {courses} = this.props;
-		const renderCourses = this.check(courses);
-		const showFilter = this.state.filter === 'filter' ? <Filter filtering={this.filterHandler} title={this.titles} /> : <FilterSign filtering={this.filterHandler} />;
+		const {courseState} = this.props;
+		const renderCourses = courseState.length > 0 ? courseState.map((course) => <Item course={course} />) : <NoItem col="8" />;
 		return (
 			<div className="row">
 				<div className="col">
 					<div className="card" style={list}>
-						{showFilter}
-						{/* <div className="card-body">
-							<div className="actions">
-								<button onClick={(e) => render('addCourse')} className="btn btn-outline-success btn-icon m-l-5">
-									<i className="material-icons">note_add</i>
-									افزودن دوره
-								</button>
-							</div>
-						</div> */}
 						<div className="card-header">دوره های شما</div>
 						<div className="card-body">
 							<table className="table table-bordered table-hover table-striped text-center">
@@ -75,7 +36,7 @@ export class Table2 extends Component {
 								</thead>
 								<tbody>{renderCourses}</tbody>
 							</table>
-							{/* if( courses[0]!=undefined ||courses[0]!=undefined){  */}
+
 							<table className="table table-bordered table-hover table-striped text-center">
 								<tbody>
 									<tr>
@@ -88,7 +49,6 @@ export class Table2 extends Component {
 									</tr>
 								</tbody>
 							</table>
-							{/* // } */}
 						</div>
 					</div>
 				</div>
@@ -97,4 +57,43 @@ export class Table2 extends Component {
 	}
 }
 
-export default Table2;
+const mapState = (state) => ({courseState: state.courses.items, messages: state.courses.messages, errorMessages: state.courses.errorMessages});
+
+const mapDispatch = (dispatch) => {
+	return {
+		fetchCourse: (payload) => {
+			dispatch({
+				type: actions.FETCH_COURSE,
+				payload,
+			});
+		},
+	};
+};
+
+export default connect(mapState, mapDispatch)(Courses);
+
+//NOTE filter course
+// .filter((course) => {
+// 	if (this.state.filter === 'all') return true;
+// 	else {
+// 		console.log(course);
+// 		const filterType = this.state.filter === 'vip' ? 2 : 1;
+// 		return course.type === filterType;
+// 	}
+// })
+
+// filterHandler = (filter) => {
+// 	this.setState((prev) => {
+// 		return {
+// 			...prev,
+// 			filter,
+// 		};
+// 	});
+// };
+// titles = {
+// 	all: 'همه',
+// 	income: 'درآمد',
+// 	cost: 'هزینه',
+// };
+
+// const showFilter = this.state.filter === 'filter' ? <Filter filtering={this.filterHandler} title={this.titles} /> : <FilterSign filtering={this.filterHandler} />;

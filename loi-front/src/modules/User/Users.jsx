@@ -8,7 +8,7 @@ import FilterSign from '../../Partials/Filter/FilterSign';
 import TableWithCash from '../HOC/TableWithCash';
 import {actions} from '../actions';
 const Users = (props) => {
-	const {history, location, userState, addUser, messages, errorMessages} = props;
+	const {history, location, userState, fetchUser, messages, errorMessages} = props;
 	const query = new URLSearchParams(location.search);
 	const [users, setUsers] = useState([]);
 
@@ -19,7 +19,7 @@ const Users = (props) => {
 		fetch(`https://jsonplaceholder.ir/users`)
 			.then((res) => res.json())
 			.then((dataFetch) => setUsers(dataFetch));
-		// .finally(() => addUser(users));
+		// .finally(() => fetchUser(users));
 	}, [users.length]);
 
 	useEffect(() => setUsers(users.sort((a, b) => (a[type] > b[type] ? -1 : 1))), [query.get('sort')]);
@@ -64,7 +64,7 @@ const Users = (props) => {
 						</table>
 					</div>
 					<div className="col">
-						<button className="btn btn-warning" onClick={() => addUser()}>
+						<button className="btn btn-warning" onClick={() => fetchUser()}>
 							<span>
 								Get Data From MongoDB
 								<span class="material-icons">{messages}</span>
@@ -99,7 +99,7 @@ const mapState = (state) => ({userState: state.users.items, messages: state.user
 
 const mapDispatch = (dispatch) => {
 	return {
-		addUser: (payload) => {
+		fetchUser: (payload) => {
 			dispatch({
 				type: actions.FETCH_USER,
 				payload,

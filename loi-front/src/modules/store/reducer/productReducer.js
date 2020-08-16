@@ -7,9 +7,15 @@ const reducer = (productState, action) => {
 		// 	result = {...productState, items: [...productState.items, ...action.payload]};
 		// 	break;
 		case actions.FETCH_PRODUCT_SUCCESS:
-			result = {...productState, items: action.payload.products, messages: action.payload.messages};
+			result = {...productState, items: action.payload.items, messages: action.payload.messages};
 			break;
 		case actions.FETCH_PRODUCT_FAILED:
+			result = {...productState, items: [...productState.items, action.payload.messages]};
+			break;
+		case actions.ADD_PRODUCT_SUCCESS:
+			result = {...productState, items: action.payload.items, messages: action.payload.messages};
+			break;
+		case actions.ADD_PRODUCT_FAILED:
 			result = {...productState, items: [...productState.items, action.payload.messages]};
 			break;
 		default:

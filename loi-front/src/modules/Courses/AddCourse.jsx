@@ -1,7 +1,9 @@
 import React from 'react';
 import {getCategories} from '../../Utility/Category';
+import {connect} from 'react-redux';
+import {actions} from '../actions';
 import {list} from '../../Partials/style';
-const AddCourse = ({item}) => {
+const AddCourse = ({addCourse}) => {
 	// const categories = getCategories();
 	const saveHandler = (e) => {
 		e.preventDefault();
@@ -16,7 +18,7 @@ const AddCourse = ({item}) => {
 			tags: form.tags.value,
 		};
 
-		return item(formsItem);
+		return addCourse(formsItem);
 	};
 
 	return (
@@ -100,4 +102,15 @@ const AddCourse = ({item}) => {
 	);
 };
 
-export default AddCourse;
+const mapDispatch = (dispatch) => {
+	return {
+		addCourse: (payload) => {
+			dispatch({
+				type: actions.ADD_COURSE,
+				payload,
+			});
+		},
+	};
+};
+
+export default connect(null, mapDispatch)(AddCourse);

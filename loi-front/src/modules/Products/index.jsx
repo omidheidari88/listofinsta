@@ -9,7 +9,10 @@ import {list} from '../../Partials/style';
 import Pagination from '../../Partials/Pagination';
 import {StateContext} from '../store/context/ContextManager';
 
-const Products = () => {
+const Products = ({fetchProduct, productState}) => {
+	useEffect(() => {
+		fetchProduct();
+	}, [productState.length]);
 	const [state, dispatch] = useContext(StateContext);
 	const filter = 'all';
 	const filterHandler = (filter) => {};
@@ -31,7 +34,7 @@ const Products = () => {
 	};
 
 	const showFilter = filter === 'filter' ? <Filter filtering={filterHandler} title={titles} /> : <FilterSign filtering={filterHandler} />;
-	const renderItems = [] > 0 ? state.items.map((product) => <Item {...product} />) : <NoItem col="6" />;
+	const renderItems = productState.length > 0 ? productState.map((product) => <Item {...product} />) : <NoItem col="6" />;
 	return (
 		<div className="row">
 			<div className="col">
@@ -76,9 +79,9 @@ const mapState = (state) => ({productState: state.products.items, messages: stat
 
 const mapDispatch = (dispatch) => {
 	return {
-		addProduct: (payload) => {
+		fetchProduct: (payload) => {
 			dispatch({
-				type: actions.FETCH_USER,
+				type: actions.FETCH_PRODUCT,
 				payload,
 			});
 		},

@@ -6,8 +6,9 @@ const axios = new Axios();
 //TODO FETCH Worker
 function* fetchCourseWorker(action) {
 	try {
-		const Courses = yield call(() => axios.get('course/add').then((res) => res.data.items));
-		yield put({type: actions.FETCH_COURSE_SUCCESS, payload: {Courses: Courses}});
+		const courses = yield call(() => axios.get('course/add').then((res) => res.data.items));
+
+		yield put({type: actions.FETCH_COURSE_SUCCESS, payload: {items: courses}});
 	} catch (error) {
 		yield put({type: actions.FETCH_COURSE_FAILED, payload: {messages: error.message}});
 	}
@@ -15,6 +16,20 @@ function* fetchCourseWorker(action) {
 //STUB FETCH Watcher
 export function* fetchCourseWatcher() {
 	yield takeEvery(actions.FETCH_COURSE, fetchCourseWorker);
+}
+
+//TODO add Worker
+function* addCourseWorker(action) {
+	try {
+		const courses = yield call(() => axios.post('course/add', action.payload).then((res) => res.data.items));
+		yield put({type: actions.ADD_COURSE_SUCCESS, payload: {items: courses}});
+	} catch (error) {
+		yield put({type: actions.ADD_COURSE_FAILED, payload: {messages: error.message}});
+	}
+}
+//STUB add Watcher
+export function* addCourseWatcher() {
+	yield takeEvery(actions.ADD_COURSE, addCourseWorker);
 }
 
 //TODO update Worker

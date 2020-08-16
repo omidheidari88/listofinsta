@@ -6,8 +6,8 @@ const axios = new Axios();
 //TODO FETCH Worker
 function* fetchProductWorker(action) {
 	try {
-		const Products = yield call(() => axios.get('product/add').then((res) => res.data.items));
-		yield put({type: actions.FETCH_PRODUCT_SUCCESS, payload: {Products: Products}});
+		const products = yield call(() => axios.get('product/add').then((res) => res.data.items));
+		yield put({type: actions.FETCH_PRODUCT_SUCCESS, payload: {items: products}});
 	} catch (error) {
 		yield put({type: actions.FETCH_PRODUCT_FAILED, payload: {messages: error.message}});
 	}
@@ -15,6 +15,20 @@ function* fetchProductWorker(action) {
 //STUB FETCH Watcher
 export function* fetchProductWatcher() {
 	yield takeEvery(actions.FETCH_PRODUCT, fetchProductWorker);
+}
+
+//TODO add Worker
+function* addProductWorker(action) {
+	try {
+		const products = yield call(() => axios.post('product/add', action.payload).then((res) => res.data.items));
+		yield put({type: actions.ADD_PRODUCT_SUCCESS, payload: {items: products}});
+	} catch (error) {
+		yield put({type: actions.ADD_PRODUCT_FAILED, payload: {messages: error.message}});
+	}
+}
+//STUB add Watcher
+export function* addProductWatcher() {
+	yield takeEvery(actions.ADD_PRODUCT, addProductWorker);
 }
 
 //TODO update Worker
