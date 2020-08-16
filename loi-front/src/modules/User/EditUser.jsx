@@ -1,7 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import {connect} from 'react-redux';
+
 import {actions} from '../actions';
-const EditUserList = ({userData, updateUser}) => {
+const EditUserList = ({userData, updateUser, name}) => {
 	const [editable, setEditable] = useState(false);
 	const updateUserData = (e) => {
 		e.preventDefault();
@@ -16,6 +17,7 @@ const EditUserList = ({userData, updateUser}) => {
 		};
 		return updateUser(formsItem);
 	};
+
 	return (
 		<div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" style={{padding: '0px'}}>
 			<div className="card">
@@ -123,3 +125,8 @@ const mapDispatch = (dispatch) => {
 };
 
 export default connect(null, mapDispatch)(EditUserList);
+
+//NOTE
+// EditUserList.prototype = {
+// 	name: PropTypes.func.isRequired,
+// };

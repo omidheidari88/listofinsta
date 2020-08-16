@@ -1,12 +1,16 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, lazy, Suspense} from 'react';
 import {UserContext} from '../store/context/ContextManager';
 import {connect} from 'react-redux';
 import FetchUser from './FetchUser';
-import MongoUser from './MongoUser';
-import Filter from '../../Partials/Filter';
-import FilterSign from '../../Partials/Filter/FilterSign';
-import TableWithCash from '../HOC/TableWithCash';
+// import MongoUser from './MongoUser';
+// import Filter from '../../Partials/Filter';
+// import FilterSign from '../../Partials/Filter/FilterSign';
+// import TableWithCash from '../HOC/TableWithCash';
 import {actions} from '../actions';
+import Loader from '../../Partials/Loader';
+
+const MongoUser = lazy(() => import('./MongoUser'));
+
 const Users = (props) => {
 	const {history, location, userState, fetchUser, messages, errorMessages} = props;
 	const query = new URLSearchParams(location.search);
@@ -42,7 +46,11 @@ const Users = (props) => {
 	];
 
 	const jsonPlaceHolderUsers = users.map((data) => <FetchUser data={data} metaData={props} />);
-	const monngoUsers = userState.map((data) => <MongoUser data={data} metaData={props} />);
+	const monngoUsers = userState.map((data) => (
+		<Suspense fallback={<Loader />}>
+			<MongoUser data={data} metaData={props} />
+		</Suspense>
+	));
 	// const UserWithLocalData = TableWithCash(User, props, 'product');
 	return (
 		<div>

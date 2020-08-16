@@ -1,6 +1,7 @@
-import React from 'react';
+import React, {useRef} from 'react';
 import {connect} from 'react-redux';
 import {actions} from '../actions';
+import {useEffect} from 'react';
 const Register = ({updateModal, registerUser, messages, errorMessages}) => {
 	const postItems = (e) => {
 		e.preventDefault();
@@ -14,6 +15,10 @@ const Register = ({updateModal, registerUser, messages, errorMessages}) => {
 		};
 		return registerUser(userInfo);
 	};
+	const focusForm = useRef();
+	useEffect(() => {
+		focusForm.current.focus();
+	}, []);
 	return (
 		<div className="limiter">
 			<div className="container-login100 bg-auth">
@@ -22,7 +27,7 @@ const Register = ({updateModal, registerUser, messages, errorMessages}) => {
 					<span> {errorMessages ? <span className="btn btn-danger">{errorMessages}</span> : messages}</span>
 					<form id="form" className="login100-form validate-form p-b-33 p-t-5" onSubmit={(e) => postItems(e)}>
 						<div className="wrap-input100 validate-input" data-validate="Enter firstname">
-							<input type="text" className="input100" name="first_name" id="first_name" placeholder="first name" /> {/*value={typeof first_name != 'undefined' ? first_name : ''}*/}
+							<input type="text" className="input100" name="first_name" id="first_name" placeholder="first name" ref={focusForm} /> {/*value={typeof first_name != 'undefined' ? first_name : ''}*/}
 							<span className="focus-input100" data-placeholder="&#xe82a;"></span>
 						</div>
 						<div className="wrap-input100 validate-input" data-validate="Enter lastname">

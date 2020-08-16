@@ -1,11 +1,12 @@
-import React from 'react';
+import React, {lazy, Suspense} from 'react';
 import {Switch, Route} from 'react-router-dom';
 import SideBar from './SideBar';
-import Header from '../Partials/Header';
+// import Header from '../Partials/Header';
 import routes from './Router/routes';
 import {StateManager} from './store/context/ContextManager';
 import Modal from './Modal';
-
+import Loader from '../Partials/Loader';
+const Header = lazy(() => import('../Partials/Header'));
 const Apps = () => {
 	const components = () => {
 		return (
@@ -20,9 +21,12 @@ const Apps = () => {
 		<StateManager>
 			<div id="wrapper" className="rtl">
 				<div id="container">
-					<Header />
+					<Suspense fallback={<Loader />}>
+						<Header />
+					</Suspense>
 					<Modal />
 					<SideBar />
+
 					<div class="dashboard-wrapper mt-3">
 						<div class="dashboard-ecommerce ">
 							<div class="container-fluid dashboard-content  ">{components()}</div>

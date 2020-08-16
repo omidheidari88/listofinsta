@@ -11,7 +11,7 @@
 		"yarn.lock": true,
 		"node_modules": true,
 		".env": true,
-		".gitignore": true,
+		// ".gitignore": true,
 		"**/view": true,
 		"**/services": true,
 		"**/app.js": true,

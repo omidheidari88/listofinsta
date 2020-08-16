@@ -6,7 +6,6 @@ import Register from '../auth/Register';
 import Login from '../auth/Login';
 import EditUser from '../User/EditUser';
 const Modals = ({modal, updateModal}) => {
-	console.log(modal);
 	const currentComponent = (modal) => {
 		let result = '';
 		switch (modal.component) {
@@ -17,7 +16,7 @@ const Modals = ({modal, updateModal}) => {
 				result = <Login />;
 				break;
 			case 'EditUser':
-				result = <EditUser userData={modal.userData} />;
+				result = <EditUser userData={modal.userData} name="data" />;
 				break;
 
 			default:
