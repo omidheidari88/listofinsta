@@ -1,6 +1,6 @@
 import React, {useRef} from 'react';
 import {connect} from 'react-redux';
-import {actions} from '../actions';
+import {actions} from '../store/actions';
 import {useEffect} from 'react';
 const Register = ({updateModal, registerUser, messages, errorMessages}) => {
 	const postItems = (e) => {
@@ -25,6 +25,7 @@ const Register = ({updateModal, registerUser, messages, errorMessages}) => {
 				<div className="wrap-login100 p-t-30 p-b-50">
 					<span className="login100-form-title p-b-41">Register</span>
 					<span> {errorMessages ? <span className="btn btn-danger">{errorMessages}</span> : messages}</span>
+
 					<form id="form" className="login100-form validate-form p-b-33 p-t-5" onSubmit={(e) => postItems(e)}>
 						<div className="wrap-input100 validate-input" data-validate="Enter firstname">
 							<input type="text" className="input100" name="first_name" id="first_name" placeholder="first name" ref={focusForm} /> {/*value={typeof first_name != 'undefined' ? first_name : ''}*/}

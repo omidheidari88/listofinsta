@@ -4,7 +4,7 @@ import userReducer from './userReducer';
 import modalReducer from './modalReducer';
 
 export const initialState = {
-	users: {items: [], messages: '', hasError: false, errorMessages: '', successUpdate: false},
+	users: {items: [], messages: '', hasError: false, errorMessages: '', successUpdate: false, userAuthenication: {isUserLogin: false, messages: 'you dont have access to this route'}},
 	products: {items: [], messages: '', hasError: false, errorMessages: ''},
 	courses: {items: [], messages: '', hasError: false, errorMessages: ''},
 	modal: {items: {path: '/', component: 'Login', status: false}},

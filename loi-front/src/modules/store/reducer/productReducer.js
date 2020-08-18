@@ -1,4 +1,4 @@
-import {actions} from '../../actions';
+import {actions} from '../actions';
 
 const reducer = (productState, action) => {
 	let result = productState;

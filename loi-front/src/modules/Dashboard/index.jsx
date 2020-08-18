@@ -2,11 +2,13 @@ import React, {useState, useEffect} from 'react';
 import Products from '../Products';
 import Courses from '../Courses';
 import Axios from '../../Ajax/Axios';
+import {Redirect} from 'react-router-dom';
 
 const Dashboard = () => {
 	let [productItems, setProductItems] = useState([]);
 	let [courseItems, setCourseItems] = useState([]);
 	let [is_loading, setIs_loading] = useState(false);
+
 	const axios = new Axios();
 	const addProduct = (item) => {
 		setIs_loading(true);
@@ -45,8 +47,10 @@ const Dashboard = () => {
 			.catch((err) => console.log(err))
 			.finally(() => setIs_loading(false));
 	}, [productItems.length]);
+	// const authCheck = !is_login ? <Redirect to="product/add" /> : ((<Products products={productItems} />), (<Courses courses={courseItems} />));
 	return (
 		<>
+			{/* {authCheck} */}
 			<Products products={productItems} />
 			<Courses courses={courseItems} />
 		</>

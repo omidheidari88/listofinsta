@@ -9,7 +9,7 @@ exports.authMiddleware = (req, res, next) => {
 	if (!token) {
 		return res.status(401).send({
 			success: false,
-			message: "you don't have access to admin pannel please login as an admin",
+			message: "you don't have access to user component",
 		});
 	}
 	const verifyToken = verify(token);

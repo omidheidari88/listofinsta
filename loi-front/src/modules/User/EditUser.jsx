@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {connect} from 'react-redux';
 
-import {actions} from '../actions';
+import {actions} from '../store/actions';
 const EditUserList = ({userData, updateUser, name}) => {
 	const [editable, setEditable] = useState(false);
 	const updateUserData = (e) => {

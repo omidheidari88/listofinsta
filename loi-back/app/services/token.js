@@ -10,18 +10,19 @@ exports.verify = (token) => {
 	}
 };
 exports.findToken = (req) => {
-	// const {authorization} = req.headers;
+	const {authorization} = req.headers;
 
 	// Object.keys(req.headers).includes('authorization')
 	// if (!('authorization' in req.headers)) {
 	// 	return false;
 	// }
-	const authorization = req.session.token;
+	// const authorization = req.session.token;
 	if (!authorization) {
 		return false;
 	}
 	const [bearer, token] = authorization.split(' ');
-	if (!token) {
+
+	if (!token || token === 'null') {
 		return false;
 	}
 	return token;

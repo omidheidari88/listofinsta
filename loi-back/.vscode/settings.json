@@ -13,9 +13,9 @@
 		".env": true,
 		// ".gitignore": true,
 		"**/view": true,
-		"**/services": true,
+		// "**/services": true,
 		"**/app.js": true,
-		"**/router.js": true,
+		// "**/router.js": true,
 		"**/middlewares": true,
 		"**/database": true
 	}

@@ -2,14 +2,14 @@ import React, {useState, useEffect, lazy, Suspense} from 'react';
 import {UserContext} from '../store/context/ContextManager';
 import {connect} from 'react-redux';
 import FetchUser from './FetchUser';
-// import MongoUser from './MongoUser';
+import MongoUser from './MongoUser';
 // import Filter from '../../Partials/Filter';
 // import FilterSign from '../../Partials/Filter/FilterSign';
 // import TableWithCash from '../HOC/TableWithCash';
-import {actions} from '../actions';
+import {actions} from '../store/actions';
 import Loader from '../../Partials/Loader';
 
-const MongoUser = lazy(() => import('./MongoUser'));
+// const MongoUser = lazy(() => import('./MongoUser'));
 
 const Users = (props) => {
 	const {history, location, userState, fetchUser, messages, errorMessages} = props;
@@ -26,17 +26,20 @@ const Users = (props) => {
 		// .finally(() => fetchUser(users));
 	}, [users.length]);
 
-	useEffect(() => setUsers(users.sort((a, b) => (a[type] > b[type] ? -1 : 1))), [query.get('sort')]);
-	const filterHandler = () => {
-		history.push({
-			search: new URLSearchParams({
-				sort: 'acse',
-			}).toString(),
-		});
-	};
+	// useEffect(() => setUsers(users.sort((a, b) => (a[type] > b[type] ? -1 : 1))), [query.get('sort')]);
+	// const filterHandler = () => {
+	// 	history.push({
+	// 		search: new URLSearchParams({
+	// 			sort: 'acse',
+	// 		}).toString(),
+	// 	});
+	// };
+	useEffect(() => {
+		fetchUser();
+	}, []);
 	const usersData = [
 		{
-			whenClick: () => filterHandler(),
+			// whenClick: () => filterHandler(),
 			tittle: 'ID',
 		},
 		{
@@ -46,11 +49,16 @@ const Users = (props) => {
 	];
 
 	const jsonPlaceHolderUsers = users.map((data) => <FetchUser data={data} metaData={props} />);
-	const monngoUsers = userState.map((data) => (
-		<Suspense fallback={<Loader />}>
-			<MongoUser data={data} metaData={props} />
-		</Suspense>
-	));
+	const monngoUsers =
+		userState.length > 0 ? (
+			userState.map((data) => (
+				// <Suspense fallback={<Loader />}>
+				<MongoUser data={data} metaData={props} />
+				// </Suspense>
+			))
+		) : (
+			<div>no user found</div>
+		);
 	// const UserWithLocalData = TableWithCash(User, props, 'product');
 	return (
 		<div>
@@ -74,7 +82,7 @@ const Users = (props) => {
 					<div className="col">
 						<button className="btn btn-warning" onClick={() => fetchUser()}>
 							<span>
-								Get Data From MongoDB
+								Refresh Data
 								<span class="material-icons">{messages}</span>
 							</span>
 						</button>

@@ -1,7 +1,7 @@
 import React, {useContext, useEffect} from 'react';
 import Item from './Item';
 import {connect} from 'react-redux';
-import {actions} from '../actions';
+import {actions} from '../store/actions';
 import NoItem from '../../Partials/Filter/NoItem';
 import Filter from '../../Partials/Filter';
 import FilterSign from '../../Partials/Filter/FilterSign';

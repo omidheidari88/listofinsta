@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {actions} from '../actions';
-const Login = ({updateModal}) => {
+import {actions} from '../store/actions';
+const Login = ({updateModal, LoginUser}) => {
 	const postItems = (e) => {
 		e.preventDefault();
 		const form = document.querySelector('#form');
@@ -9,7 +9,7 @@ const Login = ({updateModal}) => {
 			email: form.email.value,
 			password: form.password.value,
 		};
-		return formsItem;
+		return LoginUser(formsItem);
 	};
 
 	return (
@@ -74,6 +74,12 @@ const Login = ({updateModal}) => {
 
 const mapDispatch = (dispatch) => {
 	return {
+		LoginUser: (payload) => {
+			dispatch({
+				type: actions.LOGIN_USER,
+				payload,
+			});
+		},
 		updateModal: (payload) => {
 			dispatch({
 				type: actions.UPDATE_MODAL,

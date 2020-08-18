@@ -2,7 +2,7 @@ import React, {useContext, useState} from 'react';
 import {Link} from 'react-router-dom';
 import {UserContext} from '../store/context/ContextManager';
 import {connect} from 'react-redux';
-import {actions} from '../actions';
+import {actions} from '../store/actions';
 const Td = ({metaData, data, updateUser, successUpdate, deleteUser, userState, renderModal}) => {
 	const {match} = metaData;
 	const [editable, setEditable] = useState(false);

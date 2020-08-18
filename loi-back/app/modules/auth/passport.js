@@ -25,10 +25,11 @@ exports.passportLocalRegister = async () => {
 					password,
 					confpass: req.body.confpass,
 				};
-
+				user.is_admin = false;
 				await hashingPassword(user);
-
 				const registeredUser = await registerUser(user);
+
+				const token = sign({uid: registerUser.insertId, is_admin: user.is_admin});
 
 				if (registeredUser.affectedRows < 1) {
 					return done(null, false, req.flash('errors', 'user can not register/please try later'));

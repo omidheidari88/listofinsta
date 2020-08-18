@@ -1,6 +1,6 @@
 import {takeEvery, put, call} from 'redux-saga/effects';
 import Axios from '../../../Ajax/Axios';
-import {actions} from '../../actions';
+import {actions} from '../actions';
 const axios = new Axios();
 
 //TODO FETCH Worker

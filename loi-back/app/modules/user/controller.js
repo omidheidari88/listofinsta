@@ -1,6 +1,6 @@
 const taskStatus = require('./task_status');
 const {saveUser, deleteUser, userModel, findItems, update, deleteMongo} = require('./model');
-
+const {findToken, verify} = require('../../services/token');
 exports.getItem = async (req, res) => {
 	//mysql
 	// const items = await userModel();
@@ -27,6 +27,28 @@ exports.remove = async (req, res) => {
 	const id = item.id;
 	const result = await deleteMongo(id);
 	if (result) res.send({item});
+};
+
+exports.authenticate = (req, res) => {
+	const token = findToken(req);
+	if (!token) {
+		return res.status(401).send({
+			success: false,
+			message: "you don't have access to user component",
+		});
+	}
+	const verifyToken = verify(token);
+	if (!verifyToken) {
+		console.log('can not verify token');
+		return res.status(401).send({
+			success: false,
+			message: "you don't have verify option",
+		});
+	}
+	res.status(200).send({
+		success: true,
+		message: 'token find',
+	});
 };
 
 // exports.user = async (req, res) => {

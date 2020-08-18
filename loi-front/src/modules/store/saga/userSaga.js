@@ -1,6 +1,7 @@
 import {takeEvery, put, call} from 'redux-saga/effects';
 import Axios from '../../../Ajax/Axios';
-import {actions} from '../../actions';
+import {actions} from '../actions';
+
 const axios = new Axios();
 
 //TODO FETCH Worker
@@ -19,17 +20,47 @@ export function* fetchUserWatcher() {
 
 //TODO REGISTER Worker
 function* registerUserWorker(action) {
-	const response = yield call(() => axios.post('auth/register', action.payload).then((res) => res.data));
 	try {
+		const response = yield call(() => axios.post('auth/register', action.payload).then((res) => res.data));
+		if (response.success) {
+			yield call(() => localStorage.setItem('token', response.token));
+		}
 		yield put({type: actions.REGISTER_USER_SUCCESS, payload: {user: response.item, messages: response.message}});
 	} catch (error) {
-		yield put({type: actions.REGISTER_USER_FAILED, payload: {messages: response.message}});
+		yield put({type: actions.REGISTER_USER_FAILED, payload: {messages: error.message}});
 	}
 }
 
 //STUB REGISTER Watcher
 export function* registerUserWatcher() {
 	yield takeEvery(actions.REGISTER_USER, registerUserWorker);
+}
+
+//TODO login Worker
+function* loginUserWorker(action) {
+	const token = localStorage.getItem('token');
+	try {
+		const response = yield call(() =>
+			axios
+				.post('auth/login', action.payload, {
+					headers: {
+						Authorization: `Bearer ${token}`,
+					},
+				})
+				.then((res) => res.data),
+		);
+		if (response.success) {
+			yield call(() => localStorage.setItem('token', response.token));
+		}
+		yield put({type: actions.LOGIN_USER_SUCCESS, payload: {userLogin: response.userLogin, messages: response.message}});
+	} catch (error) {
+		yield put({type: actions.LOGIN_USER_FAILED, payload: {messages: error.message}});
+	}
+}
+
+//STUB login Watcher
+export function* loginUserWatcher() {
+	yield takeEvery(actions.LOGIN_USER, loginUserWorker);
 }
 
 //TODO update Worker
@@ -60,4 +91,29 @@ function* deleteUserWorker(action) {
 //STUB DELETE Watcher
 export function* deleteUserWatcher() {
 	yield takeEvery(actions.DELETE_USER, deleteUserWorker);
+}
+
+//TODO AUTHENTICATION Worker
+function* authenticationWorker(action) {
+	const token = localStorage.getItem('token');
+	try {
+		const response = yield call(() =>
+			axios
+				.post('user/', null, {
+					headers: {
+						Authorization: `Bearer ${token}`,
+					},
+				})
+				.then((res) => res.data),
+		);
+		yield put({type: actions.AUTHENTICATION_SUCCESS, payload: {userLogin: response.success, messages: response.message}});
+	} catch (error) {
+		console.log(error);
+		yield put({type: actions.AUTHENTICATION_FAILED, payload: {messages: error.message}});
+	}
+}
+
+//STUB AUTHENTICATION Watcher
+export function* authenticationWatcher() {
+	yield takeEvery(actions.AUTHENTICATION, authenticationWorker);
 }

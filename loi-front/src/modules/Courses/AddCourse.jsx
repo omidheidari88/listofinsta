@@ -1,7 +1,7 @@
 import React from 'react';
 import {getCategories} from '../../Utility/Category';
 import {connect} from 'react-redux';
-import {actions} from '../actions';
+import {actions} from '../store/actions';
 import {list} from '../../Partials/style';
 const AddCourse = ({addCourse}) => {
 	// const categories = getCategories();

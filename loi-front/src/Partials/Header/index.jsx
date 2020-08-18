@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {actions} from '../../modules/actions';
+import {actions} from '../../modules/store/actions';
 import {connect} from 'react-redux';
 
 export class index extends Component {

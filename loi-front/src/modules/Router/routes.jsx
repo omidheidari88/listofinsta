@@ -49,6 +49,7 @@ const routes = [
 		component: EditUserList,
 	},
 	{
+		path: '/auth/register',
 		component: Register,
 	},
 	{

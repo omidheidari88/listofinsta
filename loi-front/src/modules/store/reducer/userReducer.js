@@ -1,14 +1,10 @@
-import {actions} from '../../actions';
-import {takeLatest} from 'redux-saga/effects';
+import {actions} from '../actions';
 
-// users: {items: [], messages: 'sentiment_very_dissatisfied', hasError: false, errorMessages: '',successUpdate:false},
+// users: {items: [], messages: '', hasError: false, errorMessages: '', successUpdate: false, userAuthenication: {isUserLogin: false, messages: 'you dont have access to this route'}},
 
 const reducer = (userState, action) => {
 	let result = userState;
 	switch (action.type) {
-		// case actions.FETCH_USER:
-		// 	result = {...userState, items: [...userState.items, ...action.payload]};
-		// 	break;
 		case actions.FETCH_USER_SUCCESS:
 			result = {...userState, items: action.payload.users, messages: action.payload.messages};
 			break;
@@ -19,6 +15,18 @@ const reducer = (userState, action) => {
 			result = {...userState, items: [...userState.items, action.payload.user], messages: action.payload.messages};
 			break;
 		case actions.REGISTER_USER_FAILED:
+			result = {...userState, hasError: true, errorMessages: action.payload.messages};
+			break;
+		case actions.LOGIN_USER_SUCCESS:
+			result = {...userState, userAuthenication: {...userState.userAuthenication, isUserLogin: action.payload.userLogin, messages: action.payload.messages}};
+			break;
+		case actions.LOGIN_USER_FAILED:
+			result = {...userState, hasError: true, errorMessages: action.payload.messages};
+			break;
+		case actions.AUTHENTICATION_SUCCESS:
+			result = {...userState, userAuthenication: {...userState.userAuthenication, isUserLogin: action.payload.userLogin, messages: action.payload.messages}};
+			break;
+		case actions.AUTHENTICATION_FAILED:
 			result = {...userState, hasError: true, errorMessages: action.payload.messages};
 			break;
 		case actions.UPDATE_USER_SUCCESS:

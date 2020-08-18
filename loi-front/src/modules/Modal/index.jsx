@@ -1,7 +1,7 @@
 import React from 'react';
 import {Switch, Route} from 'react-router-dom';
 import {connect} from 'react-redux';
-import {actions} from '../actions';
+import {actions} from '../store/actions';
 import Register from '../auth/Register';
 import Login from '../auth/Login';
 import EditUser from '../User/EditUser';

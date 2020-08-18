@@ -514,6 +514,9 @@ iframe {
 .bg-auth {
 	background-image: url('../images/6771.jpg');
 }
+.bg-auth-access {
+	background-image: url('../images/noaccess.jpg');
+}
 .login100-form-btn:hover:before {
 	opacity: 1;
 }

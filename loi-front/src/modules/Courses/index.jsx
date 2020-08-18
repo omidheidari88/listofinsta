@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {actions} from '../actions';
+import {actions} from '../store/actions';
 import Item from './Item';
 import NoItem from '../../Partials/Filter/NoItem';
 // import Filter from '../../Partials/Filter';
